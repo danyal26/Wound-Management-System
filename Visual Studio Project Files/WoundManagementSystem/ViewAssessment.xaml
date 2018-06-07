@@ -1,0 +1,727 @@
+﻿<Page
+    x:Class="WoundManagementSystem.ViewAssessment"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WoundManagementSystem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="PanelAssessment">
+        <Image Source="{StaticResource NavigationBackground}"
+                   Opacity="0.7"
+                   Stretch="UniformToFill"/>
+
+        <RelativePanel>
+
+            <!-- TITLE -->
+            <Grid x:Name="PanelAssessmentTitle"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignTopWithPanel="True"
+                  Margin="10,10,10,10" Background="White">
+
+                <Button x:Name="BtnCancelAssessment" HorizontalAlignment="Right" Margin="10"
+                                Height="45" Width="45" FontSize="22" Click="BtnCancelAssessment_Click"
+                                Template="{StaticResource WhiteButtonTemplate}">
+                    <SymbolIcon Symbol="Cancel"/>
+                </Button>
+
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="{StaticResource IconAppointments}" 
+                           Width="30" Height="30"/>
+                    <TextBlock Style="{StaticResource Title}">
+                        View Assessment</TextBlock>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid x:Name="MainPanel" RelativePanel.Below="PanelAssessmentTitle"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignBottomWithPanel="True"
+                      Background="Transparent"
+                  Margin="10,0,10,0">
+
+                <ScrollViewer>
+
+                    <StackPanel>
+
+                        <!-- ******************* PANEL 1 *********************** -->
+
+                        <StackPanel Background="White" Padding="60,30" Margin="0,0,0,10">
+
+                            <!-- Row 1 -->
+                            <Grid Margin="0,20,0,10" x:Name="Row1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                                    <TextBlock Style="{StaticResource 20Blue}">Purpose of visit:</TextBlock>
+                                    <TextBlock x:Name="TxtPurpose" Style="{StaticResource 18DarkGray}"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Row 2 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Description:</TextBlock>
+                                    <TextBlock x:Name="TxtDescription" Style="{StaticResource 18DarkGray}"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Manner:</TextBlock>
+                                    <TextBlock x:Name="TxtManner" Style="{StaticResource 18DarkGray}"/>
+                                </StackPanel>
+                            </Grid>
+
+                        </StackPanel>
+
+                        <!-- ******************* PANEL 2 *********************** -->
+
+                        <StackPanel Background="White" Padding="60,30" Margin="0,0,0,10">
+
+                            <!-- Row 3 -->
+                            <Grid Margin="0,20,0,10" x:Name="Row3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Diabetes Mellitus:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtDiabetes" Style="{StaticResource 18DarkGray}"
+                                                           Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+
+                                </StackPanel>
+
+
+                                <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Hypertension:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtHypertension" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">IHD:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtIHD" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Row 4  -->
+                            <Grid Margin="0,40,0,20" x:Name="Row4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Bronchial Asthma:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtAsthma"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Thyroid:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtThyroid"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">CVA:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtCVA"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Row 5 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">DVT:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtDVT"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Allergy:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtAllergy"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Smoking/Alcohol/IVDA:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtSmoking"  Style="{StaticResource 18DarkGray}"
+                                                      Height="50" TextWrapping="WrapWholeWords" />
+
+                                    </RelativePanel>
+                                </StackPanel>
+                            </Grid>
+
+
+                            <!-- Row 6 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Intermitten claudication:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtClaudication"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Ischaemic pain at rest:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtPainAtRest"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Hyperesthesia:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtHyperesthesia"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Row 7 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row7">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Paraesthesia:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtParaesthesia"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Dysesthesia:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtDysesthesia"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Hypesthesia:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtHypesthesia"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Row 9 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row9">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Radicular pain:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtRadPain"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Anhydrosis:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtAnhydrosis"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Row 8 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Treatment/Surgery performed:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtTreatment"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                            </Grid>
+
+
+                        </StackPanel>
+
+                        <!-- ******************* PANEL 3 *********************** -->
+
+                        <StackPanel Background="White" Padding="60,30" Margin="0,0,0,10">
+
+                            <!-- Row 10 -->
+                            <Grid Margin="0,20,0,10" x:Name="Row10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Pallor:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtPallor"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Jaundice:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtJaundice"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Clubbing:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtClubbing"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Row 11 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row11">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Peripheral pulses:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtPulses"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Cardiovascular system:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtCardiovascular"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Respiratory system:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtRespiratory"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Row 12 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Abdominal examination:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtAbdominal"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Neurological examination:</TextBlock>
+                                    <RelativePanel>
+                                        <TextBlock x:Name="TxtNeurological"  Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </RelativePanel>
+                                </StackPanel>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                        <!-- ******************* PANEL 4 *********************** -->
+
+                        <StackPanel Background="White" Padding="60,30" Margin="0,0,0,10">
+
+                            <!-- Row 13 -->
+                            <Grid x:Name="Row13" Margin="0,20,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,40,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">BP:</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="TxtBP" Style="{StaticResource 18DarkGray}"
+                                                           HorizontalAlignment="Left" Height="50" 
+                                                           TextWrapping="WrapWholeWords"/>
+
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Style="{StaticResource 20Blue}">Pulse:</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="TxtPulse" Style="{StaticResource 18DarkGray}"
+                                                           HorizontalAlignment="Left" Height="50" 
+                                                           TextWrapping="WrapWholeWords"/>
+
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Row 14 -->
+                            <Grid  Margin="0,40,0,20" x:Name="Row14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,40,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Temperature:</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="TxtTemp" Style="{StaticResource 18DarkGray}"
+                                                           HorizontalAlignment="Left" Height="50" 
+                                                           TextWrapping="WrapWholeWords"/>
+
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Style="{StaticResource 20Blue}">RBS:</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="TxtRBS" Style="{StaticResource 18DarkGray}"
+                                                           HorizontalAlignment="Left" Height="50" 
+                                                           TextWrapping="WrapWholeWords"/>
+
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                        <!-- ******************* PANEL 5 *********************** -->
+
+                        <StackPanel Background="White" Padding="60,30" Margin="0,0,0,10">
+
+                            <!-- Row 20 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,40,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Extent of undermining:</TextBlock>
+                                    <TextBlock x:Name="TxtUndermining" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,40,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Wound surface:</TextBlock>
+                                    <TextBlock x:Name="TxtWoundSurface" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Style="{StaticResource 20Blue}">Status of periwound tissue:</TextBlock>
+                                    <TextBlock x:Name="TxtPeriwound" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Row 21 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row21">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,40,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Hypertrophic Callus:</TextBlock>
+                                    <TextBlock x:Name="TxtCallus" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0,0,40,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Brittle Nail:</TextBlock>
+                                    <TextBlock x:Name="TxtBrittleNail" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Style="{StaticResource 20Blue}">Hammer Toe:</TextBlock>
+                                    <TextBlock x:Name="TxtHammerToe" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Row 15 -->
+                            <Grid Margin="0,20,0,10" x:Name="Row15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Site:</TextBlock>
+                                    <TextBlock x:Name="TxtSite" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Size:</TextBlock>
+                                    <TextBlock x:Name="TxtSize" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Row 16 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Depth:</TextBlock>
+                                    <TextBlock x:Name="TxtDepth" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Wound Exudate:</TextBlock>
+                                    <TextBlock x:Name="TxtWoundExudate" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Row 17 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row17">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Circumferential:</TextBlock>
+                                    <TextBlock x:Name="TxtCircumferential" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Peripheral circulation:</TextBlock>
+                                    <TextBlock x:Name="TxtCirculation" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+
+                            </Grid>
+
+                            <!-- Row 18 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row18">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Fissures:</TextBlock>
+                                    <TextBlock x:Name="TxtFissures" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Loss of pedal hair growth:</TextBlock>
+                                    <TextBlock x:Name="TxtLossHairGrowth" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Row 19 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row19">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Cyanosis of toes:</TextBlock>
+                                    <TextBlock x:Name="TxtCyanosis" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                    <TextBlock Style="{StaticResource 20Blue}">Pallor of foot:</TextBlock>
+                                    <TextBlock x:Name="TxtPallorFoot" Style="{StaticResource 18DarkGray}"
+                                                       Height="50" TextWrapping="WrapWholeWords"/>
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- Row 22 -->
+                            <Grid Margin="0,40,0,20" x:Name="Row22">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                    <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Duration of non-healing ulcer:</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="TxtDurationUlcer" 
+                                                           Style="{StaticResource 18DarkGray}"
+                                                           MaxWidth="200" Width="200" HorizontalAlignment="Left" 
+                                                           Height="50" TextWrapping="WrapWholeWords"/>
+
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </Grid>
+
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </ScrollViewer>
+
+            </Grid>
+
+        </RelativePanel>
+    </Grid>
+</Page>

@@ -1,0 +1,272 @@
+﻿<Page
+    x:Class="WoundManagementSystem.Receipt"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WoundManagementSystem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:WoundManagementSystem"
+    mc:Ignorable="d">
+
+    <RelativePanel x:Name="PanelMain" Background="#999999">
+        <RelativePanel x:Name="PanelTop" Background="White" BorderThickness="0,0,0,1"
+                       BorderBrush="#999999" RelativePanel.AlignRightWithPanel="True"
+                       RelativePanel.AlignLeftWithPanel="True">
+            <TextBlock Text="Receipt" RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       RelativePanel.AlignVerticalCenterWithPanel="True" Style="{StaticResource Title}"/>
+            <Button x:Name="BtnCancelPrint" RelativePanel.AlignRightWithPanel="True" Margin="10"
+                                Height="45" Width="45" FontSize="22" Click="BtnCancelPrint_Click"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                                Template="{StaticResource WhiteButtonTemplate}">
+                <SymbolIcon Symbol="Cancel"/>
+            </Button>
+        </RelativePanel>
+        
+        <ScrollViewer HorizontalAlignment="Center" Background="White" RelativePanel.Below="PanelTop"
+                          RelativePanel.AlignHorizontalCenterWithPanel="True"
+                      >
+            <RelativePanel x:Name="PanelReceipt" Width="780">
+                    
+                    <Grid x:Name="GridLogo" Height="70" Margin="0,10,0,0"
+                          Width="{Binding ActualWidth, ElementName=MenuPanel}"
+                          RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True">
+                        <Image x:Name="logo" Source="{StaticResource LogoImage}"/>
+                    </Grid>
+
+                <TextBlock x:Name="LogoText" RelativePanel.Below="GridLogo" Text="Santa Wound Management Center"
+                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                           Style="{StaticResource 22DarkGray}"/>
+
+                <Rectangle x:Name="Div1" Height="1" RelativePanel.AlignRightWithPanel="True" 
+                           Fill="#666666" Margin="60,20"
+                           RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="LogoText"/>
+
+                <Grid x:Name="PanelDetails" 
+                      RelativePanel.Below="Div1" RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True" Margin="60,0">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,10">
+                            <TextBlock Text="Patient ID:" Style="{StaticResource 18DarkGray}"
+                                       Margin="0,0,0,5"/>
+                            <TextBlock Text="Patient Name:" Style="{StaticResource 18DarkGray}" 
+                                       Margin="0,0,0,5"/>
+                            <TextBlock Text="Visit Type:" Style="{StaticResource 18DarkGray}"
+                                       Margin="0,0,0,5"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="0,10">
+                            <TextBlock x:Name="LblPatientID" Text="Patient ID:" Style="{StaticResource 18Blue}"
+                                       Margin="0,0,0,5"/>
+                            <TextBlock x:Name="LblName" Text="Patient Name:" Style="{StaticResource 18Blue}"
+                                       Margin="0,0,0,5"/>
+                            <TextBlock x:Name="LblType" Text="Visit Type:" Style="{StaticResource 18Blue}"
+                                       Margin="0,0,0,5"/>
+                        </StackPanel>
+                        
+                    </Grid>
+
+                    <Rectangle Grid.Column="1" Width="1" Fill="#999999" Margin="0,20"/>
+
+                    <Grid Grid.Column="2" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,10">
+                            <TextBlock Text="Invoice No:" Style="{StaticResource 18DarkGray}"
+                                       Margin="0,0,0,5"/>
+                            <TextBlock Text="Date:" Style="{StaticResource 18DarkGray}"
+                                       Margin="0,0,0,5"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="0,10">
+                            <TextBlock x:Name="LblInvoiceNo" Text="Invoice No:" Style="{StaticResource 18Blue}"
+                                       Margin="0,0,0,5"/>
+                            <TextBlock x:Name="LblDate" Text="Date:" Style="{StaticResource 18Blue}"
+                                       Margin="0,0,0,5"/>
+                        </StackPanel>
+                        
+                    </Grid>
+                    
+                </Grid>
+
+                <Rectangle x:Name="Div2" Height="1" RelativePanel.AlignRightWithPanel="True" 
+                           Fill="#666666" Margin="60,20"
+                           RelativePanel.AlignLeftWithPanel="True" RelativePanel.Below="PanelDetails"/>
+
+                <TextBlock x:Name="TitleMedication" Text="Medication" RelativePanel.Below="Div2"
+                           Margin="60,10" Style="{StaticResource 26DarkGray}" />
+                
+
+                <!-- MEDICATION LIST -->
+                <ListView x:Name="ListViewMedication" RelativePanel.Below="TitleMedication"
+                          IsItemClickEnabled="False" ItemsSource="{x:Bind Path=medList}"
+                          RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"
+                          Margin="60,0" MinHeight="150">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="LightGray"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter Property="Margin" Value="2"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="data:Medicine">
+                            <RelativePanel VerticalAlignment="Center">
+
+                                <TextBlock x:Name="LblID" Text="{x:Bind id}" Margin="20,0,0,0"
+                                                           Style="{StaticResource 14DarkGray}"
+                                                           RelativePanel.AlignLeftWithPanel="True" />
+                                
+                                <TextBlock Text="{x:Bind name}" Margin="20,0,0,0"
+                                                           Style="{StaticResource 14DarkGray}"
+                                           RelativePanel.RightOf="LblID"/>
+
+                                <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                        Orientation="Horizontal">
+                                    <TextBlock Text="Qty: "
+                                                           Style="{StaticResource 14Gray}" />
+
+                                    <TextBlock Text="{x:Bind quantity}"
+                                                           Style="{StaticResource 14Gray}" 
+                                                           Margin="3,0,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel RelativePanel.AlignRightWithPanel="True"
+                                                        Orientation="Horizontal">
+                                    <TextBlock Text="Price: "
+                                                           Style="{StaticResource 14Gray}" />
+
+                                    <TextBlock Text="{x:Bind price}" Margin="3,0,20,0"
+                                                           Style="{StaticResource 14Gray}" />
+                                </StackPanel>
+
+
+                            </RelativePanel>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+                
+                
+
+                <TextBlock x:Name="TitleServices" Text="Services" Style="{StaticResource 26DarkGray}"
+                           RelativePanel.Below="ListViewMedication" Margin="60,10"/>
+
+                <!-- SERVICES LIST -->
+                <ListView x:Name="ListViewServices" RelativePanel.Below="TitleServices"
+                          IsItemClickEnabled="False" ItemsSource="{x:Bind Path=servicesList}"
+                          RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"
+                          Margin="60,0"  MinHeight="150">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="BorderBrush" Value="LightGray"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter Property="Margin" Value="2"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="data:Service">
+                            <RelativePanel VerticalAlignment="Center">
+
+                                <TextBlock x:Name="LblID" Text="{x:Bind id}" Margin="20,0,0,0"
+                                                           Style="{StaticResource 14DarkGray}"
+                                                           RelativePanel.AlignLeftWithPanel="True" />
+                                
+                                <TextBlock Text="{x:Bind name}" Margin="20,0,0,0"
+                                                           Style="{StaticResource 14DarkGray}"
+                                           RelativePanel.RightOf="LblID"/>
+
+                                <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                        Orientation="Horizontal">
+                                    <TextBlock Text="Type: "
+                                                           Style="{StaticResource 14Gray}" />
+
+                                    <TextBlock Text="{x:Bind type}"
+                                                           Style="{StaticResource 14Gray}" 
+                                                           Margin="3,0,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel RelativePanel.AlignRightWithPanel="True"
+                                                        Orientation="Horizontal">
+                                    <TextBlock Text="Price: "
+                                                           Style="{StaticResource 14Gray}" />
+
+                                    <TextBlock Text="{x:Bind price}" Margin="3,0,20,0"
+                                                           Style="{StaticResource 14Gray}" />
+                                </StackPanel>
+
+
+                            </RelativePanel>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <!-- TOTAL -->
+                <Rectangle x:Name="Div3" Fill="{StaticResource AppBlueDarker}"
+                           RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"
+                           Margin="60,20,60,20" Height="1" RelativePanel.Below="ListViewServices"/>
+
+                <RelativePanel RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="Div3"
+                               Margin="0,0,20,20">
+                    <TextBlock Text="Total: " RelativePanel.LeftOf="LblTotalValue"
+                               Style="{StaticResource 20DarkGray}"/>
+                    
+                    <TextBlock x:Name="LblTotalValue" Text="R800" RelativePanel.AlignRightWithPanel="True"
+                           Margin="10,0,60,0" Style="{StaticResource 20Blue}"/>
+                </RelativePanel>
+
+                
+
+            </RelativePanel>
+            
+        </ScrollViewer>
+
+
+            <Button x:Name="BtnPrint" Click="BtnPrint_Click" RelativePanel.AlignRightWithPanel="True"
+                    Template="{StaticResource BlueButtonTemplate}" Width="150" Height="50"
+                    Margin="10"
+                    RelativePanel.AlignBottomWithPanel="True">Print</Button>
+    </RelativePanel>
+    
+    
+</Page>

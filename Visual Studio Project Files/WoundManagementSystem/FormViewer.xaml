@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="WoundManagementSystem.FormViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WoundManagementSystem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sync="using:Syncfusion.Windows.PdfViewer"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <local:PdfReport/>
+    </Page.DataContext>
+
+    <RelativePanel Background="LightGray">
+
+        <!-- TITLE -->
+        <Grid x:Name="GridTitle"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignTopWithPanel="True" Background="White">
+
+            <Button x:Name="BtnCancel" HorizontalAlignment="Right" Margin="10"
+                                Height="45" Width="45" FontSize="22" Click="BtnCancel_Click"
+                                Template="{StaticResource WhiteButtonTemplate}">
+                <SymbolIcon Symbol="Cancel"/>
+            </Button>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image x:Name="IconForms" Source="{StaticResource IconForms}" 
+                           Width="30" Height="30"/>
+                <TextBlock Style="{StaticResource Title}">
+                        Forms</TextBlock>
+            </StackPanel>
+
+        </Grid>
+
+        <Button x:Name="BtnPrint" RelativePanel.Below="GridTitle" 
+                Command="{Binding ElementName=PDFViewer, Path=PrintCommand}"
+                RelativePanel.AlignRightWithPanel="True" Width="120" Height="100"
+                Template="{StaticResource BlueButtonTemplate}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="&#xE749;" FontFamily="Segoe MDL2 Assets" TextAlignment="Center"
+                           FontSize="26" Margin="0,0,0,10"/>
+                <TextBlock HorizontalAlignment="Center" Style="{StaticResource 16White}">
+                                    Print</TextBlock>
+            </StackPanel>
+        </Button>
+
+        <sync:SfPdfViewerControl Name="PDFViewer" Background="White"
+                                 BorderThickness="0"
+                                 RelativePanel.LeftOf="BtnPrint"
+                                 Margin="120,0,0,0"
+                                 RelativePanel.AlignLeftWithPanel="True"
+                                 RelativePanel.AlignBottomWithPanel="True"
+                                 RelativePanel.Below="GridTitle">
+        </sync:SfPdfViewerControl>
+
+    </RelativePanel>
+
+</Page>

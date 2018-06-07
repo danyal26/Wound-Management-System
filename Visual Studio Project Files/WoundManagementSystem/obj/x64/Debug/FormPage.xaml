@@ -1,0 +1,291 @@
+﻿<Page
+    x:Class="WoundManagementSystem.FormPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sync="using:Syncfusion.Windows.PdfViewer"
+    mc:Ignorable="d">
+
+    <SplitView x:ConnectionId='1' x:Name="MainSplitView">
+        <SplitView.Pane>
+            <RelativePanel Background="White" BorderBrush="#999999" BorderThickness="0,0,1,0">
+
+                <Button x:ConnectionId='2' x:Name="BtnCloseNav"                            Height="45" Width="45" FontSize="22"
+                        RelativePanel.AlignRightWithPanel="True" Template="{StaticResource WhiteButtonTemplate}">
+                    <SymbolIcon Symbol="Cancel"/>
+                </Button>
+
+                <RelativePanel Background="White"
+                               RelativePanel.AlignBottomWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True"
+                               RelativePanel.Below="BtnCloseNav">
+
+                    <Grid x:ConnectionId='3' x:Name="GridLogo" Height="50"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True">
+                        <Image x:ConnectionId='23' x:Name="logo" Source="{StaticResource LogoImage}"/>
+                    </Grid>
+
+                    <StackPanel x:ConnectionId='4' x:Name="NavPanel" Background="White"
+                            RelativePanel.Below="GridLogo"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignBottomWithPanel="True"
+                            Margin="0,20,0,0">
+
+                        <Button x:ConnectionId='7' x:Name="NavPatients"                          
+                        Style="{StaticResource NavButton}">
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='22' x:Name="PatientIcon" Source="{StaticResource IconPatients}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Patients</TextBlock>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Button x:ConnectionId='8' x:Name="NavStaff"                       
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='21' x:Name="StaffIcon" Source="{StaticResource IconStaff}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Staff</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='9' Name="NavStock"                       
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='20' x:Name="StockIcon" Source="{StaticResource IconStock}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Stock</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='10' Name="NavPriceLists"                            
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='19' x:Name="PriceListsIcon" Source="{StaticResource IconPriceLists}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Price Lists</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='11' Name="NavServices"                          
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='18' x:Name="ServicesIcon" Source="{StaticResource IconServices}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Services</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='12' x:Name="NavContacts"                          
+                        Style="{StaticResource NavButton}">
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='17' x:Name="ContactsIcon" Source="{StaticResource IconContacts}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Contacts</TextBlock>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Button x:ConnectionId='13' Name="NavFinances"                          
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='16' x:Name="FinancesIcon" Source="{StaticResource IconFinances}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Finances</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='14' Name="NavForms"                       
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='15' x:Name="FormsIcon" Source="{StaticResource IconForms}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Forms</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel>
+
+                    <Button x:ConnectionId='5' x:Name="NavLogout" RelativePanel.AlignBottomWithPanel="True"
+                    Style="{StaticResource NavButton}"                        
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True">
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image x:ConnectionId='6' x:Name="LogoutIcon" Source="{StaticResource IconLogout}"
+                               Style="{StaticResource NavIcon}"/>
+                            <TextBlock>Logout</TextBlock>
+                        </StackPanel>
+
+                    </Button>
+                </RelativePanel>
+
+            </RelativePanel>
+        </SplitView.Pane>
+
+        <SplitView.Content>
+            <RelativePanel>
+
+                <Image Source="{StaticResource NavigationBackground}"
+                   Opacity="0.7"
+                   Stretch="UniformToFill"/>
+
+                <!-- TITLE -->
+                <Grid x:ConnectionId='24' x:Name="GridTitle"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignTopWithPanel="True"
+                          Margin="10,10,10,10" Background="White">
+
+                    <Button x:ConnectionId='39' x:Name="BtnCancel" HorizontalAlignment="Right" Margin="10"
+                                Height="45" Width="45" FontSize="22"                        
+                                Template="{StaticResource WhiteButtonTemplate}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
+
+                    <Button x:ConnectionId='40' x:Name="BtnOpenNav" HorizontalAlignment="Left" Margin="10"
+                                Height="45" Width="45" FontSize="22"                           
+                                Template="{StaticResource WhiteButtonTemplate}">
+                        <SymbolIcon Symbol="AllApps"/>
+                    </Button>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:ConnectionId='41' x:Name="IconForms" Source="{StaticResource IconForms}" 
+                           Width="30" Height="30"/>
+                        <TextBlock Style="{StaticResource Title}">
+                        Forms</TextBlock>
+                    </StackPanel>
+
+                </Grid>
+
+                <!-- MAIN PANEL -->
+                <RelativePanel x:ConnectionId='25' x:Name="MainPanel" RelativePanel.Below="GridTitle"
+                               RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignBottomWithPanel="True" Background="White"
+                               Margin="10,0,10,10">
+
+                    <TextBlock x:ConnectionId='26' x:Name="LblChooseForm" Margin="30" Style="{StaticResource 26DarkGray}"
+                               RelativePanel.AlignHorizontalCenterWithPanel="True">
+                        Please pick a form to print:
+                    </TextBlock>
+
+                    <!-- FORM BUTTONS -->
+                    <StackPanel x:ConnectionId='27' x:Name="Row1" RelativePanel.Below="LblChooseForm" Margin="0,20,0,0"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                Orientation="Horizontal">
+                        <Button x:ConnectionId='34' x:Name="BtnEntry" Template="{StaticResource BlueButtonTemplate}" Margin="0,0,0,0"
+                                Height="150" Width="150"                      >
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Entry Form</TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='35' x:Name="BtnConsentEnglish" Template="{StaticResource BlueButtonTemplate}" 
+                                Margin="20,0,0,0"                      
+                                Height="150" Width="150">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Consent Form (English)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='36' x:Name="BtnConsentFrench" Template="{StaticResource BlueButtonTemplate}" 
+                                Margin="20,0,0,0"
+                                Height="150" Width="150"                      >
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Consent Form (Français)</TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='37' x:Name="BtnWound" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150"                      >
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Wound Management Form</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='38' x:Name="BtnGPBurn" Template="{StaticResource BlueButtonTemplate}" 
+                                Margin="20,0,0,0"                      
+                                Height="150" Width="150">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    GP Form (Burn)</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel x:ConnectionId='28' x:Name="Row2" RelativePanel.Below="Row1" Margin="0,20,0,0"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                Orientation="Horizontal">
+                        <Button x:ConnectionId='29' x:Name="BtnGPUlcer" Template="{StaticResource BlueButtonTemplate}" Margin="0,0,0,0"
+                                Height="150" Width="150"                       >
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    GP Form (Chronic Ulcer)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='30' x:Name="BtnGPDiabetic" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150"                      >
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    GP Form (Diabetic Foot)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='31' x:Name="BtnSpecialistBurn" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150"                      >
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Specialist Form (Burn)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='32' x:Name="BtnSpecialistUlcer" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150"                      >
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Specialist Form (Chronic Ulcer)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='33' x:Name="BtnSpecialistDiabetic" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150"                      >
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Specialist Form (Diabetic Foot)</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                </RelativePanel>
+
+            </RelativePanel>
+        </SplitView.Content>
+    </SplitView>
+</Page>
+

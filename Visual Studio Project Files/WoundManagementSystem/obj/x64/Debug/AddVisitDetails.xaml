@@ -1,0 +1,2323 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="WoundManagementSystem.AddVisitDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WoundManagementSystem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:WoundManagementSystem"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style TargetType="FlyoutPresenter">
+            <Setter Property="Background" Value="Green"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+
+        <!-- ************************************ MAIN ******************************************** -->
+
+        <SplitView x:ConnectionId='2' x:Name="MainSplitView">
+            <SplitView.Pane>
+                <RelativePanel Background="White" BorderBrush="#999999" BorderThickness="0,0,1,0">
+
+                    <Button x:ConnectionId='116' x:Name="BtnCloseNav"                            Height="45" Width="45" FontSize="22"
+                        RelativePanel.AlignRightWithPanel="True" Template="{StaticResource WhiteButtonTemplate}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
+                </RelativePanel>
+            </SplitView.Pane>
+
+            <SplitView.Content>
+                <Grid>
+
+                    <Image Source="{StaticResource NavigationBackground}"
+                   Opacity="0.7"
+                   Stretch="UniformToFill"/>
+
+                    <RelativePanel>
+
+                        <!-- TITLE -->
+                        <Grid x:ConnectionId='117' x:Name="GridTitleVisits"
+                              RelativePanel.AlignRightWithPanel="True"
+                              RelativePanel.AlignLeftWithPanel="True"
+                              RelativePanel.AlignTopWithPanel="True"
+                              Margin="10,10,10,10" Background="White">
+
+                            <Button x:ConnectionId='208' x:Name="BtnCancel" HorizontalAlignment="Right" Margin="10"
+                                Height="45" Width="45" FontSize="22"                        
+                                Template="{StaticResource WhiteButtonTemplate}">
+                                <SymbolIcon Symbol="Cancel"/>
+                            </Button>
+
+                            <Button x:ConnectionId='209' x:Name="BtnOpenNav" Visibility="Collapsed"
+                                    HorizontalAlignment="Left" Margin="10"
+                                Height="45" Width="45" FontSize="22"                           
+                                Template="{StaticResource WhiteButtonTemplate}">
+                                <SymbolIcon Symbol="AllApps"/>
+                            </Button>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='210' x:Name="IconAppts" Source="{StaticResource IconAppointments}" 
+                           Width="30" Height="30"/>
+                                <TextBlock Style="{StaticResource Title}">
+                        Add Visit Details</TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+
+                        <!-- MAIN -->
+
+                        <Grid RelativePanel.Below="GridTitleVisits"
+                              RelativePanel.AlignRightWithPanel="True"
+                              RelativePanel.AlignLeftWithPanel="True"
+                              RelativePanel.AlignBottomWithPanel="True">
+
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- CHOOSE MEDICATION -->
+                            <RelativePanel x:ConnectionId='137' x:Name="PanelMedList" Background="White" Grid.Column="0" 
+                                   Margin="10,0,0,10" Visibility="Collapsed">
+
+                                <TextBlock x:ConnectionId='201' x:Name="LblMedListTitle" Style="{StaticResource 22Gray}"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                           Margin="10" RelativePanel.AlignTopWithPanel="True">
+                                Medication
+                                </TextBlock>
+
+                                <Button x:ConnectionId='202' x:Name="BtnCancelMedList"                                Margin="10"
+                                                                                    RelativePanel.AlignRightWithPanel="True"
+                                                            Template="{StaticResource WhiteButtonTemplate}">
+                                    <SymbolIcon Symbol="Cancel"/>
+                                </Button>
+
+                                <!-- separator -->
+                                <Rectangle x:ConnectionId='203' x:Name="DividerMedsList" Height="1" RelativePanel.AlignLeftWithPanel="True"
+                                       RelativePanel.Below="LblMedListTitle"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       Fill="{StaticResource AppBlueDarker}"
+                                       Margin="40,0"/>
+
+                                <ListView x:ConnectionId='204' x:Name="ListAddMed" IsItemClickEnabled="True" 
+                                                                  
+                                  RelativePanel.AlignRightWithPanel="True"
+                                  RelativePanel.AlignLeftWithPanel="True"
+                                  RelativePanel.AlignBottomWithPanel="True"
+                                  RelativePanel.Below="DividerMedsList"
+                                                                     >
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="BorderBrush" Value="LightGray"/>
+                                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                            <Setter Property="Margin" Value="2"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListViewItem">
+                                                        <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue" />
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate                           >
+                                            <RelativePanel x:ConnectionId='205' VerticalAlignment="Center">
+
+                                                <TextBlock x:ConnectionId='206'                      Margin="20,0,0,0"
+                                                           Style="{StaticResource 14Blue}"
+                                                           RelativePanel.AlignLeftWithPanel="True" />
+
+                                                <TextBlock Text="Rs "
+                                                           Style="{StaticResource 14Gray}"
+                                                           RelativePanel.LeftOf="LblMedListPrice"/>
+
+                                                <TextBlock x:ConnectionId='207' x:Name="LblMedListPrice"                      
+                                                           RelativePanel.AlignRightWithPanel="True"
+                                                           Style="{StaticResource 14Blue}"
+                                                           Margin="3,0,20,0"/>
+
+                                            </RelativePanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+
+                            </RelativePanel>
+
+                            <!-- CHOOSE SERVICE -->
+                            <RelativePanel x:ConnectionId='138' x:Name="PanelServicesList" Background="White" Grid.Column="0" 
+                                   Margin="10,0,0,10" Visibility="Collapsed">
+
+                                <TextBlock x:ConnectionId='193' x:Name="LblServicesListTitle" Style="{StaticResource 22Gray}"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                           Margin="10" RelativePanel.AlignTopWithPanel="True">
+                                Services
+                                </TextBlock>
+
+                                <Button x:ConnectionId='194' x:Name="BtnCancelServicesList"                                     Margin="10"
+                                                                                    RelativePanel.AlignRightWithPanel="True"
+                                                            Template="{StaticResource WhiteButtonTemplate}">
+                                    <SymbolIcon Symbol="Cancel"/>
+                                </Button>
+
+                                <!-- separator -->
+                                <Rectangle x:ConnectionId='195' x:Name="DividerServicesList" Height="1" RelativePanel.AlignLeftWithPanel="True"
+                                       RelativePanel.Below="LblServicesListTitle"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       Fill="{StaticResource AppBlueDarker}"
+                                       Margin="40,0"/>
+
+                                <ListView x:ConnectionId='196' x:Name="ListAddService" IsItemClickEnabled="True"
+                                                                      
+                                                                         
+                                  RelativePanel.AlignRightWithPanel="True"
+                                  RelativePanel.AlignLeftWithPanel="True"
+                                  RelativePanel.AlignBottomWithPanel="True"
+                                  RelativePanel.Below="DividerServicesList">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="BorderBrush" Value="LightGray"/>
+                                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                            <Setter Property="Margin" Value="2"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListViewItem">
+                                                        <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue" />
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate                          >
+
+                                            <RelativePanel x:ConnectionId='197' VerticalAlignment="Center">
+
+                                                <TextBlock x:ConnectionId='198'                      Margin="20,0,0,0"
+                                                           Style="{StaticResource 14Blue}"
+                                                           RelativePanel.AlignLeftWithPanel="True" />
+
+                                                <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                        Orientation="Horizontal">
+                                                    <TextBlock Text="Type: "
+                                                           Style="{StaticResource 14Gray}" />
+
+                                                    <TextBlock x:ConnectionId='200'                     
+                                                           Style="{StaticResource 14Blue}" 
+                                                           Margin="3,0,0,0"/>
+                                                </StackPanel>
+
+                                                <StackPanel RelativePanel.AlignRightWithPanel="True"
+                                                        Orientation="Horizontal">
+                                                    <TextBlock Text="Rs"
+                                                           Style="{StaticResource 14Gray}" />
+
+                                                    <TextBlock x:ConnectionId='199'                       Margin="3,0,20,0"
+                                                           Style="{StaticResource 14Blue}" />
+                                                </StackPanel>
+
+
+                                            </RelativePanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+
+                                </ListView>
+
+                            </RelativePanel>
+
+                            <!-- MEDICATION AND SERVICES -->
+                            <Grid x:ConnectionId='139' x:Name="PanelAddMedServ" Margin="10,0,0,10" Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="4*"></RowDefinition>
+                                    <RowDefinition Height="4*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <!-- MEDICATION -->
+                                <RelativePanel Background="White" Grid.Row="0" Margin="0,0,0,10">
+
+                                    <!-- Title -->
+                                    <TextBlock x:ConnectionId='182' x:Name="LblMedicationTitle" Style="{StaticResource 22Gray}"
+                                               RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                               Margin="10">
+                                        Medication
+                                    </TextBlock>
+
+                                    <!-- Button - Add -->
+                                    <Button x:ConnectionId='183' x:Name="BtnAddMed"
+                                            RelativePanel.AlignLeftWithPanel="True"
+                                            Width="40" Height="40" Margin="2" 
+                                            Template="{StaticResource BlueButtonTemplate}" 
+                                            Foreground="White"
+                                            FontSize="22"                        >
+                                        <TextBlock Text="&#xE109;" FontFamily="Segoe MDL2 Assets" 
+                                                   FontSize="14"/>
+                                    </Button>
+
+                                    <!-- Button - Remove -->
+                                    <Button x:ConnectionId='184' x:Name="BtnRemoveMed"
+                                            RelativePanel.AlignRightWithPanel="True"
+                                            Width="40" Height="40" Margin="2" 
+                                            Template="{StaticResource GrayButtonTemplate}" 
+                                            Foreground="White"
+                                            FontSize="22"                           >
+                                        <TextBlock Text="&#xE108;" FontFamily="Segoe MDL2 Assets" 
+                                                   FontSize="14" />
+                                    </Button>
+
+                                    <!-- separator -->
+                                    <Rectangle x:ConnectionId='185' x:Name="DividerMeds" Height="1" RelativePanel.AlignLeftWithPanel="True"
+                                       RelativePanel.Below="LblMedicationTitle"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       Fill="{StaticResource AppBlueDarker}"
+                                       Margin="40,0"/>
+
+                                    <!-- Med List -->
+                                    <ListView x:ConnectionId='186' x:Name="ListPatientMeds" IsItemClickEnabled="False" 
+                                          RelativePanel.AlignRightWithPanel="True"
+                                          RelativePanel.AlignLeftWithPanel="True"
+                                          RelativePanel.AlignBottomWithPanel="True"
+                                              RelativePanel.Below="DividerMeds"
+                                                                                    >
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="BorderBrush" Value="LightGray"/>
+                                                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                                <Setter Property="Margin" Value="2"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListViewItem">
+                                                            <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate                           >
+                                                <RelativePanel x:ConnectionId='189' VerticalAlignment="Center">
+
+                                                    <TextBlock x:ConnectionId='190'                      Margin="20,0,0,0"
+                                                           Style="{StaticResource 14Blue}"
+                                                           RelativePanel.AlignLeftWithPanel="True" />
+
+                                                    <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                        Orientation="Horizontal">
+                                                        <TextBlock Text="Qty: "
+                                                           Style="{StaticResource 14Gray}" />
+
+                                                        <TextBlock x:ConnectionId='192'                         
+                                                           Style="{StaticResource 14Blue}" 
+                                                           Margin="3,0,0,0"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel RelativePanel.AlignRightWithPanel="True"
+                                                        Orientation="Horizontal">
+                                                        <TextBlock Text="Rs"
+                                                           Style="{StaticResource 14Gray}" />
+
+                                                        <TextBlock x:ConnectionId='191'                       Margin="1,0,20,0"
+                                                           Style="{StaticResource 14Blue}" />
+                                                    </StackPanel>
+
+
+                                                </RelativePanel>
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+
+                                    <!-- No Meds Panel -->
+                                    <RelativePanel x:ConnectionId='187' x:Name="NoMedsPanel" Visibility="Collapsed"
+                                                   Background="White"
+                                                   RelativePanel.Below="DividerMeds"
+                                                   RelativePanel.AlignBottomWithPanel="True"
+                                                   RelativePanel.AlignLeftWithPanel="True"
+                                                   RelativePanel.AlignRightWithPanel="True">
+                                        <TextBlock x:ConnectionId='188' x:Name="TxtNoMeds" 
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                   Style="{StaticResource 18LightGray}">
+                                            No Medication Added.
+                                        </TextBlock>
+                                    </RelativePanel>
+
+                                </RelativePanel>
+
+                                <!-- SERVICES -->
+                                <RelativePanel Background="White" Grid.Row="1" Margin="0,0,0,10">
+
+                                    <!-- Title -->
+                                    <TextBlock x:ConnectionId='171' x:Name="LblServicesTitle" Style="{StaticResource 22Gray}"
+                                               RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                               Margin="10">
+                                        Services
+                                    </TextBlock>
+
+                                    <!-- Button - Add -->
+                                    <Button x:ConnectionId='172' x:Name="BtnAddService"
+                                            RelativePanel.AlignLeftWithPanel="True"
+                                            Margin="2" Template="{StaticResource BlueButtonTemplate}" 
+                                            Foreground="White"
+                                            FontSize="22"                             Width="40" Height="40">
+                                        <TextBlock Text="&#xE109;" FontFamily="Segoe MDL2 Assets" 
+                                                   FontSize="14" FontWeight="Bold"/>
+                                    </Button>
+
+                                    <!-- Button - Remove -->
+                                    <Button x:ConnectionId='173' x:Name="BtnRemoveService"
+                                            RelativePanel.AlignRightWithPanel="True"
+                                            Width="40" Height="40" Margin="2" 
+                                            Template="{StaticResource GrayButtonTemplate}" 
+                                            Foreground="White"
+                                            FontSize="22"                               >
+                                        <TextBlock Text="&#xE108;" FontFamily="Segoe MDL2 Assets" 
+                                                   FontSize="14" FontWeight="Bold"/>
+                                    </Button>
+
+                                    <!-- separator -->
+                                    <Rectangle x:ConnectionId='174' x:Name="DividerServices" Height="1" RelativePanel.AlignLeftWithPanel="True"
+                                       RelativePanel.Below="LblServicesTitle"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       Fill="{StaticResource AppBlueDarker}"
+                                       Margin="40,0"/>
+
+                                    <!-- Services List -->
+                                    <ListView x:ConnectionId='175' x:Name="ListPatientServices" IsItemClickEnabled="False" 
+                                      RelativePanel.AlignRightWithPanel="True"
+                                      RelativePanel.AlignLeftWithPanel="True"
+                                      RelativePanel.AlignBottomWithPanel="True"
+                                          RelativePanel.Below="DividerServices"
+                                                                                    >
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="BorderBrush" Value="LightGray"/>
+                                                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                                <Setter Property="Margin" Value="2"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListViewItem">
+                                                            <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate                          >
+                                                <RelativePanel x:ConnectionId='178' VerticalAlignment="Center">
+
+                                                    <TextBlock x:ConnectionId='179'                      Margin="20,0,0,0"
+                                                           Style="{StaticResource 14Blue}"
+                                                           RelativePanel.AlignLeftWithPanel="True" />
+
+                                                    <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                        Orientation="Horizontal">
+                                                        <TextBlock Text="Type: "
+                                                           Style="{StaticResource 14Gray}" />
+
+                                                        <TextBlock x:ConnectionId='181'                     
+                                                           Style="{StaticResource 14Blue}" 
+                                                           Margin="3,0,0,0"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel RelativePanel.AlignRightWithPanel="True"
+                                                        Orientation="Horizontal">
+                                                        <TextBlock Text="Rs"
+                                                           Style="{StaticResource 14Gray}" />
+
+                                                        <TextBlock x:ConnectionId='180'                       Margin="3,0,20,0"
+                                                           Style="{StaticResource 14Blue}" />
+                                                    </StackPanel>
+
+
+                                                </RelativePanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+
+                                    <!-- No Meds Panel -->
+                                    <RelativePanel x:ConnectionId='176' x:Name="NoServicePanel" Visibility="Collapsed"
+                                                   Background="White"
+                                                   RelativePanel.Below="DividerServices"
+                                                   RelativePanel.AlignBottomWithPanel="True"
+                                                   RelativePanel.AlignLeftWithPanel="True"
+                                                   RelativePanel.AlignRightWithPanel="True">
+                                        <TextBlock x:ConnectionId='177' x:Name="TxtNoServices" 
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                   Style="{StaticResource 18LightGray}">
+                                            No Services Added.
+                                        </TextBlock>
+                                    </RelativePanel>
+
+
+                                </RelativePanel>
+
+                                <!-- ASSESSMENT BUTTON -->
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button x:ConnectionId='170' x:Name="BtnNewAssessment" 
+                                            Template="{StaticResource BlueButtonTemplate}"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="0" Padding="40,20,40,20" FontSize="18"
+                                            VerticalAlignment="Stretch"                               >
+                                        Assessment Details
+                                    </Button>
+                                </Grid>
+
+                            </Grid>
+
+                            <!-- MAIN DETAILS -->
+                            <Grid x:ConnectionId='140' x:Name="grd" Grid.Column="1" Background="White" Margin="15,0,15,10"
+                                  Padding="20,20,20,30">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"></RowDefinition>
+                                    <RowDefinition Height="3*"></RowDefinition>
+                                    <RowDefinition Height="3*"></RowDefinition>
+                                    <RowDefinition Height="3*"></RowDefinition>
+                                    <RowDefinition Height="3*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock x:ConnectionId='168' x:Name="LblName" Style="{StaticResource 32DarkGray}">
+                                        John Smith</TextBlock>
+                                    <TextBlock x:ConnectionId='169' x:Name="LblDateTime" HorizontalAlignment="Center" 
+                                               Style="{StaticResource 16Gray}">
+                                        Date Time</TextBlock>
+                                </StackPanel>
+
+                                <!-- AFTER OPENING -->
+                                <RelativePanel Grid.Row="1">
+
+                                    <!-- separator -->
+                                    <Rectangle Height="1" RelativePanel.AlignLeftWithPanel="True" 
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       Fill="{StaticResource AppBlueDarker}"
+                                       Margin="40,0,40,0"/>
+
+
+                                    <TextBlock x:ConnectionId='166' x:Name="LblAfterOpening" Style="{StaticResource 18Blue}" 
+                                               Margin="10,20,0,5">
+                                *After opening:</TextBlock>
+
+                                    <Grid RelativePanel.AlignRightWithPanel="True"
+                              RelativePanel.AlignLeftWithPanel="True"
+                              RelativePanel.Below="LblAfterOpening" 
+                              RelativePanel.AlignBottomWithPanel="True">
+
+                                        <TextBox x:ConnectionId='167' x:Name="TxtAfterOpening" Text="" 
+                                         Margin="20,0,20,0" Style="{StaticResource TextBoxTemplate}"
+                                         AcceptsReturn="True" TextWrapping="Wrap"/>
+
+                                    </Grid>
+
+
+                                </RelativePanel>
+
+                                <!-- ACTIONS TAKEN -->
+                                <RelativePanel Grid.Row="2">
+                                    <TextBlock x:ConnectionId='164' x:Name="LblActionsTaken" Margin="10,10,0,5"
+                           Style="{StaticResource 18Blue}">
+                    *Actions taken:</TextBlock>
+
+                                    <Grid RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.Below="LblActionsTaken" 
+                          RelativePanel.AlignBottomWithPanel="True">
+
+                                        <TextBox x:ConnectionId='165' x:Name="TxtActionsTaken" Text="" Style="{StaticResource TextBoxTemplate}"
+                                         AcceptsReturn="True" TextWrapping="Wrap" Margin="20,0,20,0"/>
+
+                                    </Grid>
+                                </RelativePanel>
+
+                                <!-- BEFORE CLOSING -->
+                                <RelativePanel Grid.Row="3">
+
+                                    <TextBlock x:ConnectionId='162' x:Name="LblBeforeClosing" Margin="10,10,0,5"
+                                        Style="{StaticResource 18Blue}">
+                                        *Before closing:</TextBlock>
+
+                                    <Grid RelativePanel.AlignRightWithPanel="True"
+                                      RelativePanel.AlignLeftWithPanel="True"
+                                      RelativePanel.Below="LblBeforeClosing" 
+                                      RelativePanel.AlignBottomWithPanel="True">
+
+                                        <TextBox x:ConnectionId='163' x:Name="TxtBeforeClosing" Text="" Style="{StaticResource TextBoxTemplate}"
+                                         AcceptsReturn="True" TextWrapping="Wrap"
+                                         Margin="20,0,20,0"/>
+
+                                    </Grid>
+                                </RelativePanel>
+
+                                <!-- NOTES -->
+                                <RelativePanel Grid.Row="4">
+                                    <TextBlock x:ConnectionId='160' x:Name="LblNotes" Margin="10,10,0,5"
+                                        Style="{StaticResource 18Blue}">
+                                        Notes:</TextBlock>
+                                    <Grid RelativePanel.AlignRightWithPanel="True"
+                                        RelativePanel.AlignLeftWithPanel="True"
+                                        RelativePanel.Below="LblNotes" 
+                                        RelativePanel.AlignBottomWithPanel="True">
+
+                                        <TextBox x:ConnectionId='161' x:Name="TxtNotes" Text="" Style="{StaticResource TextBoxTemplate}"
+                                         AcceptsReturn="True" TextWrapping="Wrap"
+                                         Margin="20,0,20,0"/>
+
+                                    </Grid>
+                                </RelativePanel>
+
+                            </Grid>
+
+                            <!-- PICTURES AND DOCUMENTS -->
+                            <Grid Grid.Column="2" Margin="0,0,10,10">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="4*"></RowDefinition>
+                                    <RowDefinition Height="4*"></RowDefinition>
+                                    <RowDefinition Height="1*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <!-- PHOTOS -->
+                                <RelativePanel Background="White" Grid.Row="0" Margin="0,0,0,10">
+
+                                    <!-- Title -->
+                                    <TextBlock x:ConnectionId='151' x:Name="LblPicturesTitle" Style="{StaticResource 22Gray}"
+                                               RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                               Margin="10">
+                                        Photos
+                                    </TextBlock>
+
+                                    <!-- Button - Add -->
+                                    <Button x:ConnectionId='152' x:Name="BtnAddPic"
+                                            RelativePanel.AlignLeftWithPanel="True"
+                                            Margin="2" Template="{StaticResource BlueButtonTemplate}" 
+                                            Foreground="White"
+                                            FontSize="22"                         Width="40" Height="40">
+                                        <TextBlock Text="&#xE109;" FontFamily="Segoe MDL2 Assets" 
+                                                   FontSize="14" FontWeight="Bold"/>
+                                    </Button>
+
+                                    <!-- Button - Remove -->
+                                    <Button x:ConnectionId='153' x:Name="BtnRemovePic"
+                                            RelativePanel.AlignRightWithPanel="True"
+                                            Width="40" Height="40" Margin="2" 
+                                            Template="{StaticResource GrayButtonTemplate}" 
+                                            Foreground="White"
+                                            FontSize="22"                             >
+                                        <TextBlock Text="&#xE108;" FontFamily="Segoe MDL2 Assets" 
+                                                   FontSize="14" FontWeight="Bold"/>
+                                    </Button>
+
+                                    <!-- separator -->
+                                    <Rectangle x:ConnectionId='154' x:Name="DividerPhotos" Height="1" 
+                                               RelativePanel.AlignLeftWithPanel="True"
+                                               RelativePanel.Below="LblPicturesTitle"
+                                               RelativePanel.AlignRightWithPanel="True"
+                                               Fill="{StaticResource AppBlueDarker}"
+                                               Margin="40,0"/>
+
+                                    <!-- List - Photos -->
+                                    <ListView x:ConnectionId='155' x:Name="ListPatientPhotos" IsItemClickEnabled="False" 
+                                              RelativePanel.AlignRightWithPanel="True"
+                                              RelativePanel.AlignLeftWithPanel="True"
+                                              RelativePanel.AlignBottomWithPanel="True"
+                                                RelativePanel.Below="DividerPhotos"
+                                                                                          >
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="BorderBrush" Value="LightGray"/>
+                                                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                                <Setter Property="Margin" Value="2"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListViewItem">
+                                                            <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate                                           >
+                                                <RelativePanel x:ConnectionId='158' VerticalAlignment="Center">
+
+                                                    <TextBlock x:ConnectionId='159'                          Margin="20,0,0,0"
+                                                           Style="{StaticResource 14DarkGray}"
+                                                           RelativePanel.AlignLeftWithPanel="True" />
+
+                                                </RelativePanel>
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+
+                                    <!-- No Photos Panel -->
+                                    <RelativePanel x:ConnectionId='156' x:Name="NoPhotosPanel" Visibility="Collapsed"
+                                                   Background="White"
+                                                   RelativePanel.Below="DividerPhotos"
+                                                   RelativePanel.AlignBottomWithPanel="True"
+                                                   RelativePanel.AlignLeftWithPanel="True"
+                                                   RelativePanel.AlignRightWithPanel="True">
+                                        <TextBlock x:ConnectionId='157' x:Name="TxtNoPhotos" 
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                   Style="{StaticResource 18LightGray}">
+                                            No Photos Added.
+                                        </TextBlock>
+                                    </RelativePanel>
+
+                                </RelativePanel>
+
+                                <!-- DOCUMENTS -->
+                                <RelativePanel Background="White" Grid.Row="1" Margin="0,0,0,10">
+
+                                    <!-- Title -->
+                                    <TextBlock x:ConnectionId='142' x:Name="LblDocumentsTitle" Style="{StaticResource 22Gray}"
+                                               RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                            Margin="10">
+                                                Documents
+                                    </TextBlock>
+
+                                    <!-- Button - Add -->
+                                    <Button x:ConnectionId='143' x:Name="BtnAddDoc"
+                                            RelativePanel.AlignLeftWithPanel="True"
+                                            Margin="2" Template="{StaticResource BlueButtonTemplate}" 
+                                            Foreground="White"
+                                            FontSize="22"                         Width="40" Height="40">
+                                        <TextBlock Text="&#xE109;" FontFamily="Segoe MDL2 Assets" 
+                                                   FontSize="14"/>
+                                    </Button>
+
+                                    <!-- Button - Remove -->
+                                    <Button x:ConnectionId='144' x:Name="BtnRemoveDoc"
+                                            RelativePanel.AlignRightWithPanel="True"
+                                            Width="40" Height="40" Margin="2" 
+                                            Template="{StaticResource GrayButtonTemplate}" 
+                                            Foreground="White"
+                                            FontSize="22"                           >
+                                        <TextBlock Text="&#xE108;" FontFamily="Segoe MDL2 Assets" 
+                                                   FontSize="14"/>
+                                    </Button>
+
+                                    <!-- separator -->
+                                    <Rectangle x:ConnectionId='145' x:Name="DividerDocs" Height="1"
+                                               RelativePanel.AlignLeftWithPanel="True"
+                                               RelativePanel.AlignRightWithPanel="True"
+                                            RelativePanel.Below="LblDocumentsTitle"
+                                            Fill="{StaticResource AppBlueDarker}"
+                                            Margin="40,0"/>
+
+                                    <!-- List - Docs -->
+                                    <ListView x:ConnectionId='146' x:Name="ListPatientDocs" IsItemClickEnabled="False" 
+                                          RelativePanel.AlignRightWithPanel="True"
+                                          RelativePanel.AlignLeftWithPanel="True"
+                                          RelativePanel.AlignBottomWithPanel="True"
+                                              RelativePanel.Below="DividerDocs"
+                                                                                    >
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="BorderBrush" Value="LightGray"/>
+                                                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                                <Setter Property="Margin" Value="2"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListViewItem">
+                                                            <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate                                           >
+                                                <RelativePanel x:ConnectionId='149' VerticalAlignment="Center">
+
+                                                    <TextBlock x:ConnectionId='150'                          Margin="20,0,0,0"
+                                                           Style="{StaticResource 14DarkGray}"
+                                                           RelativePanel.AlignLeftWithPanel="True" />
+
+                                                </RelativePanel>
+
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+
+                                    <!-- No Docs Panel -->
+                                    <RelativePanel x:ConnectionId='147' x:Name="NoDocsPanel" Visibility="Collapsed"
+                                                   Background="White"
+                                                   RelativePanel.Below="DividerDocs"
+                                                   RelativePanel.AlignBottomWithPanel="True"
+                                                   RelativePanel.AlignLeftWithPanel="True"
+                                                   RelativePanel.AlignRightWithPanel="True">
+                                        <TextBlock x:ConnectionId='148' x:Name="TxtNoDocs" 
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                                   Style="{StaticResource 18LightGray}">
+                                            No Documents Added.
+                                        </TextBlock>
+                                    </RelativePanel>
+
+                                </RelativePanel>
+
+                                <!-- RECEIPT BUTTON -->
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button x:ConnectionId='141' x:Name="BtnReceipt" Template="{StaticResource BlueButtonTemplate}"
+                                            HorizontalAlignment="Stretch"                         
+                                            Margin="0" Padding="40,20,40,20" FontSize="18"
+                                            VerticalAlignment="Stretch">
+                                        Save and View Receipt
+
+                                    </Button>
+                                </Grid>
+
+
+                            </Grid>
+
+
+                        </Grid>
+
+                        <!-- ERROR PANEL -->
+                        <RelativePanel x:ConnectionId='118' x:Name="PanelError" Background="Gray"
+									   Visibility="Collapsed"
+                                       MaxWidth="1000" Width="800"
+                                               Height="60" Margin="20,10,20,0"
+                                       RelativePanel.Below="GridTitleVisits"
+									   RelativePanel.AlignLeftWithPanel="True"
+									   RelativePanel.AlignRightWithPanel="True">
+
+                            <TextBlock x:ConnectionId='135' x:Name="TxtErrorMessage" Margin="20,15,20,15" Style="{StaticResource 16White}"
+									   TextWrapping="WrapWholeWords">Error</TextBlock>
+
+                            <Button x:ConnectionId='136' x:Name="BtnErrorClose" Template="{StaticResource WhiteTextBtn}" 
+									RelativePanel.AlignRightWithPanel="True"
+									RelativePanel.AlignTopWithPanel="True"
+									Padding="5"                            >
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE711;" FontSize="15"
+										   FontWeight="Bold"/>
+                            </Button>
+
+                        </RelativePanel>
+
+                        <!-- OVERLAY -->
+                        <RelativePanel x:ConnectionId='119' x:Name="Overlay" Background="#AAFFFFFF"
+                                   Visibility="Collapsed"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                       RelativePanel.AlignBottomWithPanel="True"
+                                       RelativePanel.Below="GridTitleVisits"/>
+
+                        <!-- DIALOG -->
+                        <RelativePanel x:ConnectionId='120' x:Name="PanelDialog" Background="LightGray" Grid.Column="1"
+                                           BorderBrush="{StaticResource AppBlueDarker}"
+                                           BorderThickness="1"
+                               Visibility="Collapsed" Margin="115,236"
+                               RelativePanel.AlignTopWithPanel="True"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                           Width="400" MaxWidth="500"
+                                   Height="150" MaxHeight="200" Grid.ColumnSpan="2">
+
+                            <TextBlock x:ConnectionId='133' x:Name="TxtDialogMessage" Margin="20,15,20,15"
+                                   RelativePanel.AlignTopWithPanel="True"
+                                           Style="{StaticResource 16DarkGray}"
+                               TextWrapping="WrapWholeWords">Message</TextBlock>
+
+                            <Button x:ConnectionId='134' x:Name="BtnDialogOK" Margin="15"
+                                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                        RelativePanel.AlignBottomWithPanel="True" Padding="30,10" 
+                                Template="{StaticResource BlueButtonTemplate}"
+                                                                 >
+                                OK</Button>
+
+                        </RelativePanel>
+
+                        <!-- DIALOG 2 -->
+                        <RelativePanel x:ConnectionId='121' x:Name="PanelDialog2" Background="LightGray" Grid.Column="1"
+                                           BorderBrush="{StaticResource AppBlueDarker}"
+                                           BorderThickness="1"
+                               Visibility="Collapsed" Margin="10"
+                               RelativePanel.AlignTopWithPanel="True"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                           Width="400" MaxWidth="500"
+                                   Height="150" MaxHeight="200">
+
+                            <TextBlock x:ConnectionId='130' x:Name="TxtDialogMessage2" Margin="20,15,20,15"
+                                   RelativePanel.AlignTopWithPanel="True"
+                                           Style="{StaticResource 16DarkGray}"
+                               TextWrapping="WrapWholeWords">Message</TextBlock>
+
+                            <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                        RelativePanel.AlignBottomWithPanel="True" 
+                                    Orientation="Horizontal">
+
+                                <Button x:ConnectionId='131' x:Name="BtnDialogOK2" Margin="15"
+                                        Padding="30,10" 
+                                Template="{StaticResource BlueButtonTemplate}"
+                                                                  >
+                                    Yes
+                                </Button>
+
+                                <Button x:ConnectionId='132' x:Name="BtnDialogCancel2" Margin="15"
+                                        Padding="30,10" 
+                                Template="{StaticResource GrayButtonTemplate}"
+                                                                      >
+                                    No
+                                </Button>
+
+                            </StackPanel>
+
+
+
+                        </RelativePanel>
+
+                        <!-- PHOTO NAME PANEL -->
+                        <StackPanel x:ConnectionId='122' x:Name="PanelPhotoName" Background="White"
+                                             Orientation="Vertical"    
+                                                BorderBrush="{StaticResource AppBlueDarker}"
+                                                BorderThickness="1"
+                                                RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+									   Visibility="Collapsed" Margin="20,10,20,0"
+                                    Width="600">
+
+                            <TextBlock Style="{StaticResource 18Blue}"
+                                                   Margin="0,50,0,15"
+                                                   HorizontalAlignment="Center"
+									   TextWrapping="WrapWholeWords">Enter a new name for the photo:</TextBlock>
+
+                            <TextBox x:ConnectionId='127' x:Name="TxtPhotoName" HorizontalAlignment="Stretch"
+                                                 Margin="40,0" Style="{StaticResource TextBoxTemplate}"/>
+
+                            <TextBlock x:ConnectionId='128' x:Name="TxtErrorMessage4" RelativePanel.Below="TxtDocName"
+                                       FontSize="16" Foreground="Gray" Margin="40,10"
+                                       HorizontalAlignment="Center"/>
+
+                            <Button x:ConnectionId='129' x:Name="BtnPhotoNameDone" Content="Done" 
+                                    Padding="30,10"
+                                    Template="{StaticResource BlueButtonTemplate}"
+                                                                                   
+                                                Margin="0,25,0,20"
+                                                    HorizontalAlignment="Center"/>
+
+                        </StackPanel>
+
+                        <!-- DOC NAME PANEL -->
+                        <StackPanel x:ConnectionId='123' x:Name="PanelDocName" Background="White"
+                                             Orientation="Vertical"    
+                                                BorderBrush="{StaticResource AppBlueDarker}"
+                                                BorderThickness="1"
+                                                RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+									   Visibility="Collapsed" Margin="20,10,20,0"
+                                    Width="600">
+
+                            <TextBlock Style="{StaticResource 18Blue}"
+                                                   Margin="0,50,0,15"
+                                                   HorizontalAlignment="Center"
+									   TextWrapping="WrapWholeWords">Enter a new name for the document:</TextBlock>
+
+                            <TextBox x:ConnectionId='124' x:Name="TxtDocName" HorizontalAlignment="Stretch"
+                                                 Margin="40,0" Style="{StaticResource TextBoxTemplate}"/>
+
+                            <TextBlock x:ConnectionId='125' x:Name="TxtErrorMessage3" RelativePanel.Below="TxtDocName"
+                                       FontSize="16" Foreground="Gray" Margin="40,10"
+                                       HorizontalAlignment="Center"/>
+
+                            <Button x:ConnectionId='126' x:Name="BtnDocNameDone" Content="Done" Padding="30,10"
+                                    Template="{StaticResource BlueButtonTemplate}"
+                                                                                 
+                                                Margin="0,25,0,20"
+                                                    HorizontalAlignment="Center"/>
+
+                        </StackPanel>
+
+                    </RelativePanel>
+                </Grid>
+
+            </SplitView.Content>
+        </SplitView>
+
+        <!-- ************************************ ASSESSMENT ******************************************** -->
+
+        <Grid x:ConnectionId='3' x:Name="PanelAssessment" Visibility="Collapsed">
+            <Image Source="{StaticResource NavigationBackground}"
+                   Opacity="0.7"
+                   Stretch="UniformToFill"/>
+
+            <RelativePanel>
+
+                <!-- TITLE -->
+                <Grid x:ConnectionId='4' x:Name="PanelAssessmentTitle"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignTopWithPanel="True"
+                  Margin="10,10,10,10" Background="White">
+
+                    <Button x:ConnectionId='115' x:Name="BtnCancelAssessment" HorizontalAlignment="Right" Margin="10"
+                                Height="45" Width="45" FontSize="22"                                  
+                                Template="{StaticResource WhiteButtonTemplate}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
+
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Source="{StaticResource IconAppointments}" 
+                           Width="30" Height="30"/>
+                        <TextBlock Style="{StaticResource Title}">
+                        Add Assessment Details</TextBlock>
+                    </StackPanel>
+
+                </Grid>
+
+                <!-- MAIN PANEL -->
+                <Grid x:ConnectionId='5' x:Name="MainPanel" RelativePanel.Below="PanelAssessmentTitle"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.Above="FooterPanel"
+                      Background="Transparent"
+                  Margin="10,0,10,0">
+
+                    <ScrollViewer>
+
+                        <StackPanel>
+
+                            <!-- ******************* PANEL 1 *********************** -->
+
+                            <StackPanel Background="White" Padding="60,30" Margin="0,0,0,10">
+
+                                <!-- Row 1 -->
+                                <Grid x:ConnectionId='110' Margin="0,20,0,20" x:Name="Row1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
+                                        <TextBlock Style="{StaticResource 20Blue}">Purpose of visit:</TextBlock>
+                                        <TextBox x:ConnectionId='114' x:Name="TxtPurpose" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Row 2 -->
+                                <Grid x:ConnectionId='111' Margin="0,40,0,20" x:Name="Row2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Description:</TextBlock>
+                                        <TextBox x:ConnectionId='113' x:Name="TxtDescription" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Manner:</TextBlock>
+                                        <TextBox x:ConnectionId='112' x:Name="TxtManner" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+                                </Grid>
+
+                            </StackPanel>
+
+                            <!-- ******************* PANEL 2 *********************** -->
+
+                            <StackPanel Background="White" Padding="60,30" Margin="0,0,0,10">
+
+                                <!-- Row 3 -->
+                                <Grid x:ConnectionId='67' Margin="0,20,0,20" x:Name="Row3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Diabetes Mellitus:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='108' x:Name="ToggleDiabetes" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleDiabetes"  IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='109' Margin="10" x:Name="TxtCommentDiabetes" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+
+                                    </StackPanel>
+
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Hypertension:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='106' x:Name="ToggleHypertension" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleHypertension" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='107' Margin="10" x:Name="TxtCommentHypertension" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">IHD:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='104' x:Name="ToggleIHD" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleIHD"  IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='105' Margin="10" x:Name="TxtCommentIHD" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Row 4  -->
+                                <Grid x:ConnectionId='68' Margin="0,40,0,20" x:Name="Row4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Bronchial Asthma:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='102' x:Name="ToggleAsthma" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleAsthma"  IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='103' Margin="10" x:Name="TxtCommentAsthma" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Thyroid:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='100' x:Name="ToggleThyroid" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleThyroid" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='101' Margin="10" x:Name="TxtCommentThyroid" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">CVA:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='98' x:Name="ToggleCVA" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleCVA" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='99' Margin="10" x:Name="TxtCommentCVA" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Row 5 -->
+                                <Grid x:ConnectionId='69' Margin="0,40,0,20" x:Name="Row5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">DVT:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='96' x:Name="ToggleDVT" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleDVT" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='97' Margin="10" x:Name="TxtCommentDVT" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Allergy:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='94' x:Name="ToggleAllergy" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleAllergy" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='95' Margin="10" x:Name="TxtCommentAllergy" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Smoking/Alcohol/IVDA:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='92' x:Name="ToggleSmoking" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleSmoking" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='93' Margin="10" x:Name="TxtCommentSmoking" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+                                </Grid>
+
+
+                                <!-- Row 6 -->
+                                <Grid x:ConnectionId='70' Margin="0,40,0,20" x:Name="Row6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Intermitten claudication:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='90' x:Name="ToggleClaudication" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleClaudication" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='91' Margin="10" x:Name="TxtCommentClaudication" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Ischaemic pain at rest:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='88' x:Name="TogglePainAtRest" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="TogglePainAtRest" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='89' Margin="10" x:Name="TxtCommentPainAtRest" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Hyperesthesia:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='86' x:Name="ToggleHyperesthesia" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleHyperesthesia" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='87' Margin="10" x:Name="TxtCommentHyperesthesia" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Row 7 -->
+                                <Grid x:ConnectionId='71' Margin="0,40,0,20" x:Name="Row7">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Paraesthesia:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='84' x:Name="ToggleParaesthesia" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleParaesthesia" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='85' Margin="10" x:Name="TxtCommentParaesthesia" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Dysesthesia:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='82' x:Name="ToggleDysesthesia" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleDysesthesia" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='83' Margin="10" x:Name="TxtCommentDysesthesia" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Hypesthesia:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='80' x:Name="ToggleHypesthesia" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleHypesthesia" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='81' Margin="10" x:Name="TxtCommentHypesthesia" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Row 9 -->
+                                <Grid x:ConnectionId='72' Margin="0,40,0,20" x:Name="Row9">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Radicular pain:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='78' x:Name="ToggleRadPain" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleRadPain" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='79' Margin="10" x:Name="TxtCommentRadPain" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Anhydrosis:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='76' x:Name="ToggleAnhydrosis" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleAnhydrosis" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='77' Margin="10" x:Name="TxtCommentAnhydrosis" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Row 8 -->
+                                <Grid x:ConnectionId='73' Margin="0,40,0,20" x:Name="Row8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Treatment/Surgery performed:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='74' x:Name="ToggleTreatment" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleTreatment" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='75' Margin="10" x:Name="TxtCommentTreatment" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                </Grid>
+
+
+                            </StackPanel>
+
+                            <!-- ******************* PANEL 3 *********************** -->
+
+                            <StackPanel Background="White" Padding="60,30" Margin="0,0,0,10">
+
+                                <!-- Row 10 -->
+                                <Grid x:ConnectionId='48' Margin="0,20,0,20" x:Name="Row10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Pallor:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='65' x:Name="TogglePallor" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="TogglePallor" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='66' Margin="10" x:Name="TxtCommentPallor" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Jaundice:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='63' x:Name="ToggleJaundice" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleJaundice" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='64' Margin="10" x:Name="TxtCommentJaundice" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Clubbing:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='61' x:Name="ToggleClubbing" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleClubbing" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='62' Margin="10" x:Name="TxtCommentClubbing" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Row 11 -->
+                                <Grid x:ConnectionId='49' Margin="0,40,0,20" x:Name="Row11">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Peripheral pulses:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='59' x:Name="TogglePulses" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="TogglePulses" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='60' Margin="10" x:Name="TxtCommentPulses" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Cardiovascular system:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='57' x:Name="ToggleCardiovascular" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleCardiovascular" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='58' Margin="10" x:Name="TxtCommentCardiovascular" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Respiratory system:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='55' x:Name="ToggleRespiratory" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleRespiratory" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='56' Margin="10" x:Name="TxtCommentRespiratory" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Row 12 -->
+                                <Grid x:ConnectionId='50' Margin="0,40,0,20" x:Name="Row12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Abdominal examination:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='53' x:Name="ToggleAbdominal" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleAbdominal" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='54' Margin="10" x:Name="TxtCommentAbdominal" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Neurological examination:</TextBlock>
+                                        <RelativePanel>
+                                            <ToggleSwitch x:ConnectionId='51' x:Name="ToggleNeurological" OnContent="Yes"
+                                                      OffContent="No"/>
+                                            <Button RelativePanel.RightOf="ToggleNeurological" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='52' Margin="10" x:Name="TxtCommentNeurological" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </RelativePanel>
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </StackPanel>
+
+                            <!-- ******************* PANEL 4 *********************** -->
+
+                            <StackPanel Background="White" Padding="60,30" Margin="0,0,0,10">
+
+                                <!-- Row 13 -->
+                                <Grid x:ConnectionId='38' x:Name="Row13" Margin="0,20,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,40,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">BP:</TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox x:ConnectionId='46' x:Name="TxtBP" Style="{StaticResource TextBoxTemplate}"
+                                             MaxWidth="80" HorizontalAlignment="Left"/>
+                                            <Button  Margin="20,0,0,0" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='47' Margin="10" x:Name="TxtCommentBP" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </StackPanel>
+
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Style="{StaticResource 20Blue}">Pulse:</TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox x:ConnectionId='44' x:Name="TxtPulse" Style="{StaticResource TextBoxTemplate}"
+                                             MaxWidth="80" HorizontalAlignment="Left"/>
+                                            <Button  Margin="20,0,0,0" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='45' Margin="10" x:Name="TxtCommentPulse" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </StackPanel>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Row 14 -->
+                                <Grid x:ConnectionId='39'  Margin="0,40,0,20" x:Name="Row14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,40,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Temperature:</TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox x:ConnectionId='42' x:Name="TxtTemp" Style="{StaticResource TextBoxTemplate}"
+                                             MaxWidth="80" HorizontalAlignment="Left"/>
+                                            <Button  Margin="20,0,0,0" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='43' Margin="10" x:Name="TxtCommentTemperature" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </StackPanel>
+
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Style="{StaticResource 20Blue}">RBS:</TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox x:ConnectionId='40' x:Name="TxtRBS" Style="{StaticResource TextBoxTemplate}"
+                                             MaxWidth="80" HorizontalAlignment="Left"/>
+                                            <Button  Margin="20,0,0,0" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='41' Margin="10" x:Name="TxtCommentRBS" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </StackPanel>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </StackPanel>
+
+                            <!-- ******************* PANEL 5 *********************** -->
+
+                            <StackPanel Background="White" Padding="60,30" Margin="0">
+
+                                <!-- Row 20 -->
+                                <Grid x:ConnectionId='12' Margin="0,40,0,20" x:Name="Row20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,40,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Extent of undermining:</TextBlock>
+                                        <TextBox x:ConnectionId='37' x:Name="TxtUndermining" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,40,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Wound surface:</TextBlock>
+                                        <TextBox x:ConnectionId='36' x:Name="TxtWoundSurface" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Style="{StaticResource 20Blue}">Status of periwound tissue:</TextBlock>
+                                        <TextBox x:ConnectionId='35' x:Name="TxtPeriwound" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Row 21 -->
+                                <Grid x:ConnectionId='13' Margin="0,40,0,20" x:Name="Row21">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,40,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Hypertrophic Callus:</TextBlock>
+                                        <TextBox x:ConnectionId='34' x:Name="TxtCallus" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="0,0,40,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Brittle Nail:</TextBlock>
+                                        <TextBox x:ConnectionId='33' x:Name="TxtBrittleNail" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Style="{StaticResource 20Blue}">Hammer Toe:</TextBlock>
+                                        <TextBox x:ConnectionId='32' x:Name="TxtHammerToe" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Row 15 -->
+                                <Grid x:ConnectionId='14' Margin="0,20,0,20" x:Name="Row15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Site:</TextBlock>
+                                        <TextBox x:ConnectionId='31' x:Name="TxtSite" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Size:</TextBlock>
+                                        <TextBox x:ConnectionId='30' x:Name="TxtSize" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Row 16 -->
+                                <Grid x:ConnectionId='15' Margin="0,40,0,20" x:Name="Row16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Depth:</TextBlock>
+                                        <TextBox x:ConnectionId='29' x:Name="TxtDepth" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Wound Exudate:</TextBlock>
+                                        <TextBox x:ConnectionId='28' x:Name="TxtWoundExudate" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Row 17 -->
+                                <Grid x:ConnectionId='16' Margin="0,40,0,20" x:Name="Row17">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Circumferential:</TextBlock>
+                                        <TextBox x:ConnectionId='27' x:Name="TxtCircumferential" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Peripheral circulation:</TextBlock>
+                                        <TextBox x:ConnectionId='26' x:Name="TxtCirculation" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+
+                                </Grid>
+
+                                <!-- Row 18 -->
+                                <Grid x:ConnectionId='17' Margin="0,40,0,20" x:Name="Row18">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Fissures:</TextBlock>
+                                        <TextBox x:ConnectionId='25' x:Name="TxtFissures" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Loss of pedal hair growth:</TextBlock>
+                                        <TextBox x:ConnectionId='24' x:Name="TxtLossHairGrowth" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Row 19 -->
+                                <Grid x:ConnectionId='18' Margin="0,40,0,20" x:Name="Row19">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Cyanosis of toes:</TextBlock>
+                                        <TextBox x:ConnectionId='23' x:Name="TxtCyanosis" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Margin="60,0,0,0">
+                                        <TextBlock Style="{StaticResource 20Blue}">Pallor of foot:</TextBlock>
+                                        <TextBox x:ConnectionId='22' x:Name="TxtPallorFoot" Style="{StaticResource TextBoxTemplate}"/>
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- Row 22 -->
+                                <Grid x:ConnectionId='19' Margin="0,40,0,20" x:Name="Row22">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Margin="0,0,60,0">
+                                        <TextBlock Style="{StaticResource 20Blue}"
+                                               Margin="0,0,0,5">Duration of non-healing ulcer:</TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox x:ConnectionId='20' x:Name="TxtDurationUlcer" Style="{StaticResource TextBoxTemplate}"
+                                             MaxWidth="200" Width="200" HorizontalAlignment="Left"/>
+                                            <Button  Margin="20,0,0,0" IsTabStop="False"
+                                                Template="{StaticResource AddCommentButtonTemplate}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <Flyout.FlyoutPresenterStyle>
+                                                            <Style TargetType="FlyoutPresenter">
+                                                                <Setter Property="Background" Value="White"/>
+
+                                                            </Style>
+                                                        </Flyout.FlyoutPresenterStyle>
+                                                        <StackPanel Width="400" Margin="0" Background="White">
+                                                            <TextBlock Margin="10">Add a comment:</TextBlock>
+                                                            <TextBox x:ConnectionId='21' Margin="10" x:Name="TxtCommentDurationUlcer" Style="{StaticResource TextBoxTemplate}"/>
+
+                                                        </StackPanel>
+                                                    </Flyout>
+
+                                                </Button.Flyout>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                </Grid>
+
+
+                            </StackPanel>
+                        </StackPanel>
+
+                    </ScrollViewer>
+
+                </Grid>
+
+                <!-- ERROR PANEL -->
+                <RelativePanel x:ConnectionId='6' x:Name="PanelError2" Background="Gray"
+									   Visibility="Collapsed"
+                                       MaxWidth="1000" Width="800"
+                               RelativePanel.Below="PanelAssessmentTitle"
+                                               Height="60" Margin="20,10,20,0"
+                           
+									   RelativePanel.AlignLeftWithPanel="True"
+									   RelativePanel.AlignRightWithPanel="True">
+
+                    <TextBlock x:ConnectionId='10' x:Name="TxtErrorMessage2" Margin="20,15,20,15" Style="{StaticResource 16White}"
+									   TextWrapping="WrapWholeWords">Error</TextBlock>
+
+                    <Button x:ConnectionId='11' x:Name="BtnErrorClose2" Template="{StaticResource WhiteTextBtn}" 
+									RelativePanel.AlignRightWithPanel="True"
+									RelativePanel.AlignTopWithPanel="True"
+									Padding="5"                             >
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE711;" FontSize="15"
+										   FontWeight="Bold"/>
+                    </Button>
+
+                </RelativePanel>
+
+                <!-- BUTTON PANEL -->
+                <RelativePanel x:ConnectionId='7' Background="White" x:Name="FooterPanel" 
+                               RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" 
+                  Margin="10,0,10,10">
+
+                    <!-- Add -->
+                    <Button x:ConnectionId='8' x:Name="BtnAddAssessment"  Content="Add Details" 
+                            RelativePanel.AlignRightWithPanel="True"
+                         Template="{StaticResource BlueButtonTemplate}"
+                         Margin="10,10,10,10"                               
+                    Width="200" Height="50"/>
+
+                    <!-- Remove -->
+                    <Button x:ConnectionId='9' x:Name="BtnRemoveAssessment"  Content="Remove Details" 
+                            Visibility="Collapsed"
+                            RelativePanel.LeftOf="BtnAddAssessment"
+                         Template="{StaticResource GrayButtonTemplate}"
+                         Margin="10,10,10,10"                                  
+                    Width="200" Height="50"/>
+
+
+
+                </RelativePanel>
+            </RelativePanel>
+
+        </Grid>
+    </Grid>
+
+
+
+
+</Page>
+

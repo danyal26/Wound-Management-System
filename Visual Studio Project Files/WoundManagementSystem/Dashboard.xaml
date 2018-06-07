@@ -1,0 +1,931 @@
+﻿<Page
+    x:Class="WoundManagementSystem.Dashboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WoundManagementSystem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:custom="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:data="using:WoundManagementSystem"
+    mc:Ignorable="d">
+    <Page.Resources>
+
+        <Style x:Key="DatePickerTemplate" TargetType="CalendarDatePicker">
+            <Setter Property="Foreground" Value="{ThemeResource CalendarDatePickerForeground}"/>
+            <Setter Property="Background" Value="{ThemeResource CalendarDatePickerBackground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource CalendarDatePickerBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource CalendarDatePickerBorderThemeThickness}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CalendarDatePicker">
+                        <Grid x:Name="Root">
+                            <FlyoutBase.AttachedFlyout>
+                                <Flyout Placement="Bottom">
+                                    <Flyout.FlyoutPresenterStyle>
+                                        <Style TargetType="FlyoutPresenter">
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="FlyoutPresenter">
+                                                        <ContentPresenter BorderBrush="{TemplateBinding BorderBrush}" 
+                                                                          BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
+                                                                          ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" 
+                                                                          Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                                          Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Flyout.FlyoutPresenterStyle>
+
+                                    <CalendarView x:Name="CalendarView"
+                                                  SelectedHoverBorderBrush="{StaticResource AppBlueDarker}"
+                                                  SelectedBorderBrush="{StaticResource AppBlueDarker}"
+                                                  CalendarIdentifier="{TemplateBinding CalendarIdentifier}" 
+                                                  DisplayMode="{TemplateBinding DisplayMode}" 
+                                                  DayOfWeekFormat="{TemplateBinding DayOfWeekFormat}" 
+                                                  FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}" 
+                                                  IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}" 
+                                                  IsGroupLabelVisible="{TemplateBinding IsGroupLabelVisible}" 
+                                                  IsOutOfScopeEnabled="{TemplateBinding IsOutOfScopeEnabled}"
+                                                  MinDate="{TemplateBinding MinDate}" 
+                                                  MaxDate="{TemplateBinding MaxDate}" 
+                                                  CalendarViewDayItemChanging="CalUpcomingAppt_CalendarViewDayItemChanging"
+                                                  Style="{TemplateBinding CalendarViewStyle}"/>
+
+                                </Flyout>
+                            </FlyoutBase.AttachedFlyout>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="32"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="32"/>
+                            </Grid.RowDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerBorderBrushPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerBackgroundPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerBackgroundPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerBorderBrushPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerBackgroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerBorderBrushDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="HeaderContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerHeaderForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="DateText">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerTextForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="CalendarGlyph">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerCalendarGlyphForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Unfocused"/>
+                                    <VisualState x:Name="PointerFocused"/>
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerBackgroundFocused}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected"/>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="DateText">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CalendarDatePickerTextForegroundSelected}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="HeaderContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Margin="{ThemeResource ComboBoxHeaderThemeMargin}" TextWrapping="Wrap" Visibility="Collapsed" x:DeferLoadStrategy="Lazy"/>
+                            <Border x:Name="Background" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="2" Grid.Row="1"/>
+                            <TextBlock x:Name="DateText" Foreground="{ThemeResource CalendarDatePickerTextForeground}" FontSize="15" HorizontalAlignment="Left" Padding="12, 0, 0, 2" Grid.Row="1" Text="{TemplateBinding PlaceholderText}" VerticalAlignment="Center"/>
+                            <FontIcon x:Name="CalendarGlyph" Grid.Column="1" Foreground="{ThemeResource CalendarDatePickerCalendarGlyphForeground}" FontSize="16" FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE787;" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- NAVIGATION -->
+        <RelativePanel x:Name="MenuPanel" Background="Transparent" Grid.Column="0"
+                       BorderBrush="#999999" BorderThickness="0,0,1,0">
+
+
+            <Grid x:Name="GridLogo" Height="70" Margin="0,10,0,10"
+                  Width="{Binding ActualWidth, ElementName=MenuPanel}">
+                <Image x:Name="logo" Source="{StaticResource LogoImage}"/>
+            </Grid>
+
+            <Rectangle x:Name="DivLogo" Fill="{StaticResource SeparatorGradientHorizontal}"
+                       RelativePanel.AlignRightWithPanel="True" Height="1" RelativePanel.AlignLeftWithPanel="True"
+                       RelativePanel.Below="GridLogo"/>
+
+            <TextBlock x:Name="LblDashTitle"
+                       Style="{StaticResource DashTitle}"
+                       RelativePanel.Below="DivLogo"
+                       Margin="0,10,0,0"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True">
+                DASHBOARD
+            </TextBlock>
+
+            <StackPanel x:Name="NavPanel" Background="Transparent"
+                        RelativePanel.Below="LblDashTitle"
+                        Margin="0,20,0,0"
+                        Width="{Binding ActualWidth, ElementName=MenuPanel}">
+
+                <Button x:Name="NavPatients"
+                        Style="{StaticResource NavButton}" Click="NavPatients_Click">
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:Name="PatientIcon" Source="{StaticResource IconPatients}"
+                               Style="{StaticResource NavIcon}"/>
+                        <TextBlock>Patients</TextBlock>
+                    </StackPanel>
+
+                </Button>
+
+                <Button x:Name="NavStaff" Click="NavStaff_Click"
+                        Style="{StaticResource NavButton}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:Name="StaffIcon" Source="{StaticResource IconStaff}"
+                               Style="{StaticResource NavIcon}"/>
+                        <TextBlock>Staff</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button Name="NavStock" Click="NavStock_Click"
+                        Style="{StaticResource NavButton}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:Name="StockIcon" Source="{StaticResource IconStock}"
+                               Style="{StaticResource NavIcon}"/>
+                        <TextBlock>Stock</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button Name="NavPriceLists" Click="NavPriceLists_Click"
+                        Style="{StaticResource NavButton}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:Name="PriceListsIcon" Source="{StaticResource IconPriceLists}"
+                               Style="{StaticResource NavIcon}"/>
+                        <TextBlock>Price Lists</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button Name="NavServices" Click="NavServices_Click"
+                        Style="{StaticResource NavButton}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:Name="ServicesIcon" Source="{StaticResource IconServices}"
+                               Style="{StaticResource NavIcon}"/>
+                        <TextBlock>Services</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="NavContacts" Click="NavContacts_Click"
+                        Style="{StaticResource NavButton}">
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:Name="ContactsIcon" Source="{StaticResource IconContacts}"
+                               Style="{StaticResource NavIcon}"/>
+                        <TextBlock>Contacts</TextBlock>
+                    </StackPanel>
+
+                </Button>
+
+                <Button Name="NavFinances" Click="NavFinances_Click"
+                        Style="{StaticResource NavButton}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:Name="FinancesIcon" Source="{StaticResource IconFinances}"
+                               Style="{StaticResource NavIcon}"/>
+                        <TextBlock>Finances</TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button Name="NavForms" Click="NavForms_Click"
+                        Style="{StaticResource NavButton}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:Name="FormsIcon" Source="{StaticResource IconForms}"
+                               Style="{StaticResource NavIcon}"/>
+                        <TextBlock>Forms</TextBlock>
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+
+            <Button x:Name="NavLogout" RelativePanel.AlignBottomWithPanel="True"
+                    Style="{StaticResource NavButton}"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    Click="NavLogout_Click">
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image x:Name="LogoutIcon" Source="{StaticResource IconLogout}"
+                               Style="{StaticResource NavIcon}"/>
+                    <TextBlock>Logout</TextBlock>
+                </StackPanel>
+
+            </Button>
+
+        </RelativePanel>
+
+        <!-- ADD APPOINTMENT -->
+        <RelativePanel x:Name="PanelAddAppointment" Grid.Column="1">
+
+            <Image Source="{StaticResource NavigationBackground}"
+                   Opacity="0.7"
+                   RelativePanel.AlignBottomWithPanel="True"
+                   RelativePanel.AlignTopWithPanel="True"
+                   RelativePanel.AlignRightWithPanel="True"
+                   RelativePanel.AlignLeftWithPanel="True"
+                   Stretch="UniformToFill"/>
+
+            <!-- TITLE -->
+            <StackPanel x:Name="PanelAddApptTitle" RelativePanel.AlignTopWithPanel="True"
+                        Background="White" Margin="10,10,10,0"
+                        RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignLeftWithPanel="True">
+                <TextBlock x:Name="LblAddModifyTitle"
+                    Text="Add Appointment" Style="{StaticResource Title}" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <RelativePanel RelativePanel.Below="PanelAddApptTitle"
+                  Background="White"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  Margin="10" Padding="50,30,50,0">
+
+                <Grid RelativePanel.AlignTopWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Patient ID -->
+                    <StackPanel Grid.Row="0">
+
+                        <TextBlock Text="Patient ID (Optional): " Style="{StaticResource 20Blue}" 
+                                   Margin="0,0,0,3"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="TxtID" Text="Select patient from list"
+                                   Style="{StaticResource 18DarkGray}"
+                                       Padding="10,0,0,0" Width="200"/>
+
+                            <Button x:Name="BtnChoosePatient" 
+                                Template="{StaticResource AddCommentButtonTemplate}">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE712;" FontSize="24" />
+                                <Button.Flyout>
+                                    <Flyout>
+                                        <Flyout.FlyoutPresenterStyle>
+                                            <Style TargetType="FlyoutPresenter">
+                                                <Setter Property="Background" Value="White"/>
+                                                <Setter Property="Width" Value="400"/>
+                                            </Style>
+                                        </Flyout.FlyoutPresenterStyle>
+                                        <ListView x:Name="PatientListView" IsItemClickEnabled="True"
+                                                      Width="400"
+                                              ItemsSource="{x:Bind Path=patientList}"
+                                              ItemClick="PatientListView_ItemClick">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="ListViewItem">
+                                                                <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate x:DataType="data:Patient">
+
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                                                        <TextBlock x:Name="TxtListID" Text="{x:Bind patientId}"
+                                                                 Margin="5,0,5,0" VerticalAlignment="Center"
+                                                                Style="{StaticResource 14Blue}"/>
+                                                        <TextBlock Text="-"  VerticalAlignment="Center"
+                                                                 Margin="5,0,5,0"
+                                                                Style="{StaticResource 14Blue}"/>
+                                                        <TextBlock x:Name="TxtListName" Text="{x:Bind name}" 
+                                                           Margin="5,0,5,0" 
+                                                       Style="{StaticResource 14Blue}"/>
+
+                                                        <TextBlock x:Name="TxtListSurname" Text="{x:Bind surname}" 
+                                                       Margin="5,0,5,0" 
+                                                   Style="{StaticResource 14Blue}"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </Flyout>
+
+                                </Button.Flyout>
+                            </Button>
+
+                            <Button x:Name="BtnCancelSelect"  Click="BtnCancelSelect_Click"
+                                Template="{StaticResource WhiteButtonTemplate}">
+                                <SymbolIcon Symbol="Cancel"/>
+
+                            </Button>
+                        </StackPanel>
+
+
+                    </StackPanel>
+
+                    <!-- Date and Time -->
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="1">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right"
+                                    Margin="0,0,40,0">
+                            <TextBlock Text="*Date: " Style="{StaticResource 20Blue}" 
+                                   Margin="0,0,0,3"/>
+                            <CalendarDatePicker x:Name="DatePickerAddAppt" 
+                                            DateFormat="{}{day.integer} {month.full} {year.full}" Style="{StaticResource DatePickerTemplate}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right">
+                            <TextBlock Text="*Time: " Style="{StaticResource 20Blue}"
+                                   Margin="0,0,0,3"/>
+                            <TimePicker x:Name="TimePickerAddAppt"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Name and Surname -->
+                    <Grid Grid.Row="2" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,10,0">
+                            <TextBlock Text="*Name: " Style="{StaticResource 20Blue}"
+                                   Margin="0,0,0,3"/>
+                            <TextBox x:Name="TxtName" Style="{StaticResource TextBoxTemplate}"
+                                 Height="40"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0,0,0">
+                            <TextBlock Text="*Surname: " Style="{StaticResource 20Blue}"
+                                   Margin="0,0,0,3"/>
+                            <TextBox x:Name="TxtSurname" Style="{StaticResource TextBoxTemplate}"
+                                  Height="40"/>
+                        </StackPanel>
+
+                    </Grid>
+
+                    <!-- Contact -->
+                    <StackPanel Grid.Row="3" Orientation="Vertical">
+                        <TextBlock Text="*Contact: " Style="{StaticResource 20Blue}"
+                               Margin="0,0,0,3"/>
+                        <TextBox x:Name="TxtContact" Style="{StaticResource TextBoxTemplate}"
+                              Height="40"/>
+                    </StackPanel>
+
+
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Type -->
+                        <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top">
+                            <TextBlock Text="*Type: " Style="{StaticResource 20Blue}" Margin="0,0,0,3"/>
+                            <StackPanel Orientation="Vertical" Margin="3,0,0,0">
+                                <RadioButton x:Name="RadioBurn" Content="Burn" Tag="Burn" 
+                                         Style="{StaticResource RadioButtonTemplateGray}"/>
+                                <RadioButton x:Name="RadioUlcer" Content="Chronic Ulcer" Tag="ChronicUlcer"
+                                         Style="{StaticResource RadioButtonTemplateGray}"/>
+                                <RadioButton x:Name="RadioDiabeticFoot" Content="Diabetic Foot" Tag="DiabeticFoot"
+                                         Style="{StaticResource RadioButtonTemplateGray}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Notes -->
+                        <RelativePanel Grid.Column="1" >
+                            <TextBlock x:Name="LblAddNote" Text="Notes: "  Style="{StaticResource 20Blue}"
+                                   RelativePanel.AlignTopWithPanel="True" Margin="0,0,0,3"/>
+
+                            <TextBox x:Name="TxtNotes" RelativePanel.Below="LblAddNote"
+                                 RelativePanel.AlignBottomWithPanel="True"
+                                 RelativePanel.AlignLeftWithPanel="True"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 Style="{StaticResource TextBoxTemplate}"
+                                 AcceptsReturn="True" TextWrapping="Wrap"/>
+                        </RelativePanel>
+
+                    </Grid>
+
+                    <!-- BUTTONS -->
+                    <StackPanel Grid.Row="5" Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+
+                        <Button Name="BtnAdd" Click="BtnAdd_Click" Padding="30,10" FontSize="18"
+                                Template="{StaticResource BlueButtonTemplate}">
+                            <SymbolIcon Symbol="Accept"/>
+                        </Button>
+
+                        <Button Name="BtnModify" Click="BtnModify_Click"
+                                Padding="30,10" FontSize="18"
+                                Template="{StaticResource BlueButtonTemplate}">
+                            <SymbolIcon Symbol="Accept"/>
+                        </Button>
+
+                        <Button Name="BtnCancel" Click="BtnCancel_Click" Padding="30,10" 
+                                FontSize="18"
+                                Template="{StaticResource GrayButtonTemplate}">
+                            <SymbolIcon Symbol="Cancel"/>
+                        </Button>
+
+                    </StackPanel>
+
+                </Grid>
+
+                <!-- ERROR PANEL -->
+                <RelativePanel x:Name="PanelError" Background="Gray"
+                               Visibility="Collapsed"
+                               RelativePanel.AlignTopWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True">
+
+                    <TextBlock x:Name="TxtErrorMessage" Margin="20,15,20,15" Style="{StaticResource 16White}"
+                               TextWrapping="WrapWholeWords">Error</TextBlock>
+
+                    <Button x:Name="BtnErrorClose" Template="{StaticResource WhiteTextBtn}" 
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"
+                            Padding="5" Click="BtnErrorClose_Click">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE711;" FontSize="15"
+                                   FontWeight="Bold"/>
+                    </Button>
+
+                </RelativePanel>
+
+            </RelativePanel>
+
+
+        </RelativePanel>
+
+        <!-- MAIN PANEL -->
+        <RelativePanel x:Name="MainPanel" Background="#FFDADADA" Grid.Column="1" Visibility="Collapsed">
+
+            <Image Source="{StaticResource NavigationBackground}"
+                   Opacity="0.7"
+                   RelativePanel.AlignBottomWithPanel="True"
+                   RelativePanel.AlignTopWithPanel="True"
+                   RelativePanel.AlignRightWithPanel="True"
+                   RelativePanel.AlignLeftWithPanel="True"
+                   Stretch="UniformToFill"/>
+
+            <Grid x:Name="GridTitleAppt"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignTopWithPanel="True"
+                  Margin="10,10,10,0" Background="#FFFFFF">
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image x:Name="IconAppts" Source="{StaticResource IconAppointments}" 
+                           Width="30" Height="30"/>
+                    <TextBlock Style="{StaticResource Title}">
+                        Appointments</TextBlock>
+                </StackPanel>
+
+            </Grid>
+
+            <RelativePanel x:Name="ApptTopPanel"
+                           RelativePanel.Below="GridTitleAppt"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignRightWithPanel="True"
+                           Margin="10,10,0,0">
+
+                <CalendarView x:Name="CalUpcomingAppt" SelectionMode="Single"
+                              SelectedHoverBorderBrush="{StaticResource AppBlueDarker}"
+                              SelectedBorderBrush="{StaticResource AppBlueDarker}"
+                              SelectedDatesChanged="CalUpcomingAppt_SelectedDatesChanged"
+                              CalendarViewDayItemChanging="CalUpcomingAppt_CalendarViewDayItemChanging"/>
+
+                <!-- LIST OF APPOINTMENTS -->
+
+                <RelativePanel x:Name="ApptTopLeftPanel"
+                               Background="White"
+                               RelativePanel.RightOf="CalUpcomingAppt"
+                               RelativePanel.AlignRightWithPanel="True"
+                               RelativePanel.AlignBottomWith="CalUpcomingAppt"
+                               RelativePanel.AlignTopWith="CalUpcomingAppt"
+                               Margin="10,0,10,0">
+
+                    <!-- ADD APPOINTMENT BUTTON -->
+
+                    <Button x:Name="BtnNewAppt"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"
+                            Margin="10,1,1,10" Width="120" Height="100"
+                            Click="BtnNewAppt_Click" Template="{StaticResource BlueButtonTemplate}">
+
+                        <StackPanel Orientation="Vertical">
+                            <SymbolIcon Symbol="Add" Margin="0,0,0,10"/>
+                            <TextBlock x:Name="ApptBtnText" HorizontalAlignment="Center" 
+                                       Style="{StaticResource 18White}">
+                                    Appointment</TextBlock>
+                        </StackPanel>
+
+                    </Button>
+
+                    <!-- No content -->
+                    <Grid x:Name="PanelListEmpty" 
+                                RelativePanel.AlignLeftWithPanel="True"
+                                RelativePanel.AlignTopWithPanel="True"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.LeftOf="BtnNewAppt" >
+
+                        <TextBlock Text="There are no appointments to show." Style="{StaticResource 18LightGray}"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    </Grid>
+                    <!-- No content end -->
+
+
+                    <!-- APPOINTMENT LIST -->
+                    <StackPanel x:Name="PanelAppointmentList" RelativePanel.AlignLeftWithPanel="True"
+                                RelativePanel.AlignTopWithPanel="True"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.LeftOf="BtnNewAppt">
+
+                        <ListView x:Name="ListViewAppointment" HorizontalAlignment="Stretch" 
+                                  IsItemClickEnabled="True"
+                                  ItemClick="ListViewAppointment_ItemClick"
+                                  ItemsSource="{x:Bind Path=appointmentList}"
+                                  VerticalAlignment="Stretch">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="BorderBrush" Value="LightGray"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Margin" Value="2"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListViewItem">
+                                                <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="data:Appointment">
+                                    <StackPanel Orientation="Horizontal" >
+
+                                        <TextBlock Text="{x:Bind time}" Margin="10,0,20,0"
+                                                   Style="{StaticResource 18DarkGray}"
+                                                   VerticalAlignment="Center"/>
+
+                                        <StackPanel Orientation="Horizontal" >
+                                            <TextBlock Text="{x:Bind name}" Margin="0,0,5,0"
+                                                       Style="{StaticResource 18DarkGray}"
+                                                       VerticalAlignment="Center"/>
+                                            <TextBlock Text="{x:Bind surname}" 
+                                                       Style="{StaticResource 18DarkGray}"
+                                                       VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+
+                </RelativePanel>
+
+            </RelativePanel>
+
+
+
+            <!--#region Bottom Panel-->
+            <!-- BOTTOM PANEL -->
+
+            <!-- No content -->
+            <Grid x:Name="GridNoApptSelection" Background="White"
+                  RelativePanel.Below="ApptTopPanel"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  Margin="10,10,10,10">
+                <TextBlock x:Name="TxtNoSelection" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Grid.Column="1" Style="{StaticResource 18LightGray}">
+                    Select an appointment to view</TextBlock>
+            </Grid>
+            <!-- No content end -->
+
+
+            <Grid x:Name="NextApptPanel" Background="White"
+                  RelativePanel.Below="ApptTopPanel"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  Margin="10,10,10,10">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <RelativePanel Grid.Column="0">
+
+                    <!-- NAME AND ID -->
+
+                    <TextBlock x:Name="LblNameAndID" RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"
+                            Margin="40,15,10,15">
+                    <Run x:Name="LblName" Text="John Smith" FontSize="28" Foreground="{StaticResource AppBlueDarker}"></Run>
+                    <Run x:Name="LblPatientID" Text=" : Patient ID" FontSize="18" Foreground="#444444"></Run>
+                    </TextBlock>
+
+                    <Rectangle x:Name="Div1" Height="1" Fill="{StaticResource AppBlueDarker}"
+                           RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.Below="LblNameAndID" Margin="20,0"/>
+
+
+
+                    <Grid RelativePanel.Below="Div1" RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWithPanel="True"
+                          Background="White" >
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="6*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- DATE AND TIME -->
+
+                        <StackPanel x:Name="DatePanel" Grid.Column="0" Background="White"
+                            VerticalAlignment="Center">
+
+                            <TextBlock x:Name="LblDate" HorizontalAlignment="Center" FontSize="20"
+                               Margin="0,10,0,0" VerticalAlignment="Center">
+                        27 July
+                            </TextBlock>
+
+                            <TextBlock x:Name="LblTime" HorizontalAlignment="Center" FontSize="40"
+                               Margin="0,10,0,50" 
+                               Foreground="#444444">
+      
+                        08:00
+                            </TextBlock>
+
+                        </StackPanel>
+
+                        <!-- PATIENT INFO -->
+
+                        <RelativePanel x:Name="PatientInfoPanel" Grid.Column="1">
+
+                            <Rectangle x:Name="Div2" RelativePanel.AlignTopWithPanel="True"
+                               RelativePanel.AlignBottomWithPanel="True"
+                               Width="1" Margin="0,20,0,20" Fill="{StaticResource SeparatorGradient}"/>
+
+
+                            <Grid RelativePanel.RightOf="Div2" Margin="30,20">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock x:Name="LblContact" Margin="0,10"
+                                           Style="{StaticResource 18DarkGray}">
+                                    Contact:
+                                    </TextBlock>
+                                    <TextBlock x:Name="LblNotes" Margin="0,0"
+                                           Style="{StaticResource 18DarkGray}" >
+                                    Notes:
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock x:Name="LblContactText"
+                                           Style="{StaticResource 18Gray}" Margin="20,10">
+                                    Contact
+                                    </TextBlock>
+                                    <TextBlock x:Name="LblNoteText" Margin="20,0"
+                                           Style="{StaticResource 18Gray}">
+                                    Note 1
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </Grid>
+
+
+                        </RelativePanel>
+
+                    </Grid>
+
+
+                </RelativePanel>
+
+                <StackPanel Margin="0,1,1,0" Grid.Column="1" HorizontalAlignment="Right">
+
+                    <!--Button - New Visit-->
+                    <Button x:Name="BtnNewVisit" Width="120"  Height="100"
+                            Template="{StaticResource BlueButtonTemplate}"
+                            Click="BtnNewVisit_Click">
+                        <StackPanel Orientation="Vertical">
+                            <SymbolIcon Symbol="Add" Margin="0,0,0,10"/>
+                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource 16White}">
+                                    Visit Details</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <!--Button - Add Patient-->
+                    <Button x:Name="BtnAddPatient" Width="120"  Height="100"
+                            Template="{StaticResource BlueButtonTemplate}"
+                            Click="BtnAddPatient_Click">
+
+                        <StackPanel Orientation="Vertical">
+                            <SymbolIcon Symbol="Add" Margin="0,0,0,10"/>
+                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource 16White}">
+                                    Add Patient</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Button - View Visit -->
+                    <Button x:Name="BtnViewVisit" Width="120" Height="100" Margin="0,1,0,0"
+                            Click="BtnViewVisit_Click" Template="{StaticResource BlueButtonTemplate}">
+
+                        <StackPanel Orientation="Vertical">
+                            <SymbolIcon Symbol="View" Margin="0,0,0,10"/>
+                            <TextBlock HorizontalAlignment="Center" Margin="0"
+                                       Style="{StaticResource 16White}">
+                                    View Visit</TextBlock>
+                        </StackPanel>
+
+                    </Button>
+
+                    <!-- Button - Modify Appointment -->
+                    <Button x:Name="BtnModifyAppointment" Width="120" Height="100" Margin="0,1,0,0"
+                            Click="BtnModifyAppointment_Click" Template="{StaticResource BlueButtonTemplate}">
+
+                        <StackPanel Orientation="Vertical">
+                            <SymbolIcon Symbol="Edit" Margin="0,0,0,10"/>
+                            <TextBlock HorizontalAlignment="Center" Margin="0"
+                                       Style="{StaticResource 16White}">
+                                    Appointment</TextBlock>
+                        </StackPanel>
+
+                    </Button>
+
+                    <!-- Button - Delete Appointment -->
+                    <Button x:Name="BtnDeleteAppt" Width="120" Height="100" Margin="0,1,0,0"
+                            Click="BtnDeleteAppt_Click" Template="{StaticResource GrayButtonTemplate}">
+
+                        <StackPanel Orientation="Vertical">
+                            <SymbolIcon Symbol="Delete" Margin="0,0,0,10"/>
+                            <TextBlock HorizontalAlignment="Center" Margin="0"
+                                       Style="{StaticResource 16White}">
+                                    Appointment</TextBlock>
+                        </StackPanel>
+
+                    </Button>
+
+
+                </StackPanel>
+
+
+
+            </Grid>
+
+            <!--#endregion-->
+
+        </RelativePanel>
+
+        <!-- OVERLAY -->
+        <RelativePanel x:Name="Overlay" Background="#AAFFFFFF" Grid.ColumnSpan="2"
+			   Visibility="Collapsed"/>
+
+        <!-- DIALOG -->
+        <RelativePanel x:Name="PanelDialog" Background="LightGray" Grid.Column="1"
+					   BorderBrush="{StaticResource AppBlueDarker}"
+					   BorderThickness="1"
+		   Visibility="Collapsed" Margin="10"
+		   RelativePanel.AlignTopWithPanel="True"
+					   RelativePanel.AlignHorizontalCenterWithPanel="True"
+					   Width="400" MaxWidth="500"
+			   Height="150" MaxHeight="200">
+
+            <TextBlock x:Name="TxtDialogMessage" Margin="20,15,20,15"
+			   RelativePanel.AlignTopWithPanel="True"
+					   Style="{StaticResource 16DarkGray}"
+		   TextWrapping="WrapWholeWords">Message</TextBlock>
+
+            <Button x:Name="BtnDialogOK" Margin="15"
+					RelativePanel.AlignHorizontalCenterWithPanel="True"
+					RelativePanel.AlignBottomWithPanel="True" Padding="30,10" 
+			Template="{StaticResource BlueButtonTemplate}"
+					Click="BtnDialogOK_Click">
+                OK</Button>
+
+        </RelativePanel>
+
+        <!-- DIALOG 2 -->
+        <RelativePanel x:Name="PanelDialog2" Background="LightGray" Grid.Column="1"
+					   BorderBrush="{StaticResource AppBlueDarker}"
+					   BorderThickness="1"
+		   Visibility="Collapsed" Margin="10"
+		   RelativePanel.AlignTopWithPanel="True"
+					   RelativePanel.AlignHorizontalCenterWithPanel="True"
+					   Width="400" MaxWidth="500"
+			   Height="150" MaxHeight="200">
+
+            <TextBlock x:Name="TxtDialogMessage2" Margin="20,15,20,15"
+			   RelativePanel.AlignTopWithPanel="True"
+					   Style="{StaticResource 16DarkGray}"
+		   TextWrapping="WrapWholeWords">Message</TextBlock>
+
+            <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+					RelativePanel.AlignBottomWithPanel="True" 
+				Orientation="Horizontal">
+
+                <Button x:Name="BtnDialogOK2" Margin="15"
+					Padding="30,10" 
+			Template="{StaticResource BlueButtonTemplate}"
+					Click="BtnDialogOK2_Click">
+                    Yes
+                </Button>
+
+                <Button x:Name="BtnDialogCancel2" Margin="15"
+					Padding="30,10" 
+			Template="{StaticResource GrayButtonTemplate}"
+					Click="BtnDialogCancel2_Click">
+                    No
+                </Button>
+
+            </StackPanel>
+
+
+
+        </RelativePanel>
+
+    </Grid>
+</Page>

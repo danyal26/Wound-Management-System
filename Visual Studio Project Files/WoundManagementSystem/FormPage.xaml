@@ -1,0 +1,290 @@
+﻿<Page
+    x:Class="WoundManagementSystem.FormPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sync="using:Syncfusion.Windows.PdfViewer"
+    mc:Ignorable="d">
+
+    <SplitView x:Name="MainSplitView">
+        <SplitView.Pane>
+            <RelativePanel Background="White" BorderBrush="#999999" BorderThickness="0,0,1,0">
+
+                <Button x:Name="BtnCloseNav" Click="BtnToggleNav_Click" Height="45" Width="45" FontSize="22"
+                        RelativePanel.AlignRightWithPanel="True" Template="{StaticResource WhiteButtonTemplate}">
+                    <SymbolIcon Symbol="Cancel"/>
+                </Button>
+
+                <RelativePanel Background="White"
+                               RelativePanel.AlignBottomWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True"
+                               RelativePanel.Below="BtnCloseNav">
+
+                    <Grid x:Name="GridLogo" Height="50"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True">
+                        <Image x:Name="logo" Source="{StaticResource LogoImage}"/>
+                    </Grid>
+
+                    <StackPanel x:Name="NavPanel" Background="White"
+                            RelativePanel.Below="GridLogo"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignBottomWithPanel="True"
+                            Margin="0,20,0,0">
+
+                        <Button x:Name="NavPatients" Click="NavPatients_Click"
+                        Style="{StaticResource NavButton}">
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:Name="PatientIcon" Source="{StaticResource IconPatients}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Patients</TextBlock>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Button x:Name="NavStaff" Click="NavStaff_Click"
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:Name="StaffIcon" Source="{StaticResource IconStaff}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Staff</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Name="NavStock" Click="NavStock_Click"
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:Name="StockIcon" Source="{StaticResource IconStock}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Stock</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Name="NavPriceLists" Click="NavPriceLists_Click"
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:Name="PriceListsIcon" Source="{StaticResource IconPriceLists}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Price Lists</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Name="NavServices" Click="NavServices_Click"
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:Name="ServicesIcon" Source="{StaticResource IconServices}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Services</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="NavContacts" Click="NavContacts_Click"
+                        Style="{StaticResource NavButton}">
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:Name="ContactsIcon" Source="{StaticResource IconContacts}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Contacts</TextBlock>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Button Name="NavFinances" Click="NavFinances_Click"
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:Name="FinancesIcon" Source="{StaticResource IconFinances}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Finances</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Name="NavForms" Click="NavForms_Click"
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:Name="FormsIcon" Source="{StaticResource IconForms}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Forms</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel>
+
+                    <Button x:Name="NavLogout" RelativePanel.AlignBottomWithPanel="True"
+                    Style="{StaticResource NavButton}" Click="NavLogout_Click"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True">
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image x:Name="LogoutIcon" Source="{StaticResource IconLogout}"
+                               Style="{StaticResource NavIcon}"/>
+                            <TextBlock>Logout</TextBlock>
+                        </StackPanel>
+
+                    </Button>
+                </RelativePanel>
+
+            </RelativePanel>
+        </SplitView.Pane>
+
+        <SplitView.Content>
+            <RelativePanel>
+
+                <Image Source="{StaticResource NavigationBackground}"
+                   Opacity="0.7"
+                   Stretch="UniformToFill"/>
+
+                <!-- TITLE -->
+                <Grid x:Name="GridTitle"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignTopWithPanel="True"
+                          Margin="10,10,10,10" Background="White">
+
+                    <Button x:Name="BtnCancel" HorizontalAlignment="Right" Margin="10"
+                                Height="45" Width="45" FontSize="22" Click="BtnCancel_Click"
+                                Template="{StaticResource WhiteButtonTemplate}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
+
+                    <Button x:Name="BtnOpenNav" HorizontalAlignment="Left" Margin="10"
+                                Height="45" Width="45" FontSize="22" Click="BtnToggleNav_Click"
+                                Template="{StaticResource WhiteButtonTemplate}">
+                        <SymbolIcon Symbol="AllApps"/>
+                    </Button>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:Name="IconForms" Source="{StaticResource IconForms}" 
+                           Width="30" Height="30"/>
+                        <TextBlock Style="{StaticResource Title}">
+                        Forms</TextBlock>
+                    </StackPanel>
+
+                </Grid>
+
+                <!-- MAIN PANEL -->
+                <RelativePanel x:Name="MainPanel" RelativePanel.Below="GridTitle"
+                               RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignBottomWithPanel="True" Background="White"
+                               Margin="10,0,10,10">
+
+                    <TextBlock x:Name="LblChooseForm" Margin="30" Style="{StaticResource 26DarkGray}"
+                               RelativePanel.AlignHorizontalCenterWithPanel="True">
+                        Please pick a form to print:
+                    </TextBlock>
+
+                    <!-- FORM BUTTONS -->
+                    <StackPanel x:Name="Row1" RelativePanel.Below="LblChooseForm" Margin="0,20,0,0"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                Orientation="Horizontal">
+                        <Button x:Name="BtnEntry" Template="{StaticResource BlueButtonTemplate}" Margin="0,0,0,0"
+                                Height="150" Width="150" Click="ShowPDF_Click">
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Entry Form</TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnConsentEnglish" Template="{StaticResource BlueButtonTemplate}" 
+                                Margin="20,0,0,0" Click="ShowPDF_Click"
+                                Height="150" Width="150">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Consent Form (English)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnConsentFrench" Template="{StaticResource BlueButtonTemplate}" 
+                                Margin="20,0,0,0"
+                                Height="150" Width="150" Click="ShowPDF_Click">
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Consent Form (Français)</TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnWound" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150" Click="ShowPDF_Click">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Wound Management Form</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnGPBurn" Template="{StaticResource BlueButtonTemplate}" 
+                                Margin="20,0,0,0" Click="ShowPDF_Click"
+                                Height="150" Width="150">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    GP Form (Burn)</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel x:Name="Row2" RelativePanel.Below="Row1" Margin="0,20,0,0"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                Orientation="Horizontal">
+                        <Button x:Name="BtnGPUlcer" Template="{StaticResource BlueButtonTemplate}" Margin="0,0,0,0"
+                                Height="150" Width="150"  Click="ShowPDF_Click">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    GP Form (Chronic Ulcer)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnGPDiabetic" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150" Click="ShowPDF_Click">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    GP Form (Diabetic Foot)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnSpecialistBurn" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150" Click="ShowPDF_Click">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Specialist Form (Burn)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnSpecialistUlcer" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150" Click="ShowPDF_Click">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Specialist Form (Chronic Ulcer)</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="BtnSpecialistDiabetic" Template="{StaticResource BlueButtonTemplate}" Margin="20,0,0,0"
+                                Height="150" Width="150" Click="ShowPDF_Click">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource 22White}" TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center">
+                                    Specialist Form (Diabetic Foot)</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                </RelativePanel>
+
+            </RelativePanel>
+        </SplitView.Content>
+    </SplitView>
+</Page>

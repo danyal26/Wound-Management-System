@@ -1,0 +1,735 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="WoundManagementSystem.PriceLists"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WoundManagementSystem"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:WoundManagementSystem"
+    mc:Ignorable="d">
+
+    <SplitView x:ConnectionId='2' x:Name="MainSplitView">
+        <SplitView.Pane>
+            <RelativePanel Background="White" BorderBrush="#999999" BorderThickness="0,0,1,0">
+
+                <Button x:ConnectionId='3' x:Name="BtnCloseNav"                            Height="45" Width="45" FontSize="22"
+                        RelativePanel.AlignRightWithPanel="True" Template="{StaticResource WhiteButtonTemplate}">
+                    <SymbolIcon Symbol="Cancel"/>
+                </Button>
+
+                <RelativePanel Background="White"
+                               RelativePanel.AlignBottomWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True"
+                               RelativePanel.Below="BtnCloseNav">
+
+                    <Grid x:ConnectionId='4' x:Name="GridLogo" Height="50"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True">
+                        <Image x:ConnectionId='24' x:Name="logo" Source="{StaticResource LogoImage}"/>
+                    </Grid>
+
+                    <StackPanel x:ConnectionId='5' x:Name="NavPanel" Background="White"
+                            RelativePanel.Below="GridLogo"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignBottomWithPanel="True"
+                            Margin="0,20,0,0">
+
+                        <Button x:ConnectionId='8' x:Name="NavPatients"                          
+                        Style="{StaticResource NavButton}">
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='23' x:Name="PatientIcon" Source="{StaticResource IconPatients}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Patients</TextBlock>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Button x:ConnectionId='9' x:Name="NavStaff"                       
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='22' x:Name="StaffIcon" Source="{StaticResource IconStaff}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Staff</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='10' Name="NavStock"                       
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='21' x:Name="StockIcon" Source="{StaticResource IconStock}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Stock</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='11' Name="NavPriceLists"                            
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='20' x:Name="PriceListsIcon" Source="{StaticResource IconPriceLists}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Price Lists</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='12' Name="NavServices"                          
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='19' x:Name="ServicesIcon" Source="{StaticResource IconServices}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Services</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='13' x:Name="NavContacts"                          
+                        Style="{StaticResource NavButton}">
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='18' x:Name="ContactsIcon" Source="{StaticResource IconContacts}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Contacts</TextBlock>
+                            </StackPanel>
+
+                        </Button>
+
+                        <Button x:ConnectionId='14' Name="NavFinances"                          
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='17' x:Name="FinancesIcon" Source="{StaticResource IconFinances}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Finances</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:ConnectionId='15' Name="NavForms"                       
+                        Style="{StaticResource NavButton}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image x:ConnectionId='16' x:Name="FormsIcon" Source="{StaticResource IconForms}"
+                               Style="{StaticResource NavIcon}"/>
+                                <TextBlock>Forms</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel>
+
+                    <Button x:ConnectionId='6' x:Name="NavLogout" RelativePanel.AlignBottomWithPanel="True"
+                    Style="{StaticResource NavButton}"                        
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True">
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image x:ConnectionId='7' x:Name="LogoutIcon" Source="{StaticResource IconLogout}"
+                               Style="{StaticResource NavIcon}"/>
+                            <TextBlock>Logout</TextBlock>
+                        </StackPanel>
+
+                    </Button>
+                </RelativePanel>
+
+            </RelativePanel>
+        </SplitView.Pane>
+
+        <SplitView.Content>
+            <RelativePanel>
+                <Image Source="{StaticResource NavigationBackground}"
+                   Opacity="0.7"
+                   Stretch="UniformToFill"/>
+
+                <!-- TITLE -->
+                <Grid x:ConnectionId='25' x:Name="GridTitle"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignTopWithPanel="True"
+                          Margin="10,10,10,10" Background="White">
+
+                    <Button x:ConnectionId='79' x:Name="BtnCancel" HorizontalAlignment="Right" Margin="10"
+                                Height="45" Width="45" FontSize="22"                        
+                                Template="{StaticResource WhiteButtonTemplate}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
+
+                    <Button x:ConnectionId='80' x:Name="BtnOpenNav" HorizontalAlignment="Left" Margin="10"
+                                Height="45" Width="45" FontSize="22"                           
+                                Template="{StaticResource WhiteButtonTemplate}">
+                        <SymbolIcon Symbol="AllApps"/>
+                    </Button>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image x:ConnectionId='81' x:Name="IconFinances" Source="{StaticResource IconPriceLists}" 
+                           Width="30" Height="30"/>
+                        <TextBlock x:ConnectionId='82' x:Name="LblTitle" Style="{StaticResource Title}">
+                        Price Lists</TextBlock>
+                    </StackPanel>
+
+                </Grid>
+
+                <!-- MAIN PANEL -->
+                <RelativePanel x:ConnectionId='26' x:Name="MainPanel"
+                               RelativePanel.Below="GridTitle"
+                               RelativePanel.AlignBottomWithPanel="True" 
+                               RelativePanel.AlignRightWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               Margin="10,0,10,10">
+
+                    <Grid RelativePanel.AlignTopWithPanel="True"
+                          RelativePanel.AlignBottomWithPanel="True"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.AlignLeftWithPanel="True">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+
+
+                        <!-- BUYING PANEL -->
+                        <RelativePanel x:ConnectionId='47' x:Name="PanelBuyingList" Background="White" Margin="0,0,5,0"
+                                       Grid.Column="0">
+
+                            <TextBlock x:ConnectionId='65' x:Name="TitleBuyingList" Text="Buying Price List" RelativePanel.AlignTopWithPanel="True"
+                                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                       Style="{StaticResource 24DarkGray}"
+                                       Margin="0,15,0,10"/>
+
+                            <Rectangle x:ConnectionId='66' x:Name="Div1" RelativePanel.Below="TitleBuyingList"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                       Height="1" Fill="{StaticResource AppBlueDarker}"
+                                       Margin="40,0,40,10"/>
+
+                            <!-- Search Panel -->
+                            <RelativePanel x:ConnectionId='67' x:Name="PanelSearch" RelativePanel.AlignRightWithPanel="True"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                           RelativePanel.Below="Div1" Padding="10">
+
+                                <!--Button - Add Medication-->
+                                <Button x:ConnectionId='77' x:Name="BtnAddBuyingMedicine" Margin="1"
+                                    RelativePanel.AlignLeftWithPanel="True"
+                                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                                          
+                                    Template="{StaticResource BlueButtonTemplate}">
+
+                                    <StackPanel Orientation="Horizontal" Padding="10,5,10,5">
+                                        <SymbolIcon Symbol="Add" Margin="0,0,10,0"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource 16White}">
+                                    Add Medicine</TextBlock>
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- Search box -->
+                                <TextBox x:ConnectionId='78' x:Name="TxtSearchBuying" PlaceholderText="Search"
+                                     Style="{StaticResource TextBoxTemplate}"
+                                     RelativePanel.AlignRightWithPanel="True" Width="200"
+                                     RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                                              />
+
+
+                            </RelativePanel>
+
+                            <!-- List -->
+
+                            <ListView x:ConnectionId='68' x:Name="BuyingListView"                                      
+                                      Grid.Column="0"
+                                  IsItemClickEnabled="True" Margin="0,0,0,0"
+                                                                        
+                                  RelativePanel.AlignRightWithPanel="True"
+                                  RelativePanel.AlignLeftWithPanel="True"
+                                  RelativePanel.Below="PanelSearch"
+                                      RelativePanel.Above="PanelButtonsBuying">
+
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="Margin" Value="2"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListViewItem">
+                                                    <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate                           >
+                                        <RelativePanel x:ConnectionId='73'>
+
+                                            <TextBlock x:Name="LblListID" Text="ID: " Margin="20,0,0,0"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   Style="{StaticResource 18DarkGray}"/>
+
+                                            <TextBlock x:ConnectionId='74' x:Name="TxtListID"                   
+                                                   RelativePanel.RightOf="LblListID"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   Margin="5,0,30,0"
+                                                   Style="{StaticResource 18Blue}"/>
+
+                                            <TextBlock x:Name="LblListName" Text="Name: " Margin="20,0,5,0"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   RelativePanel.RightOf="TxtListID"
+                                                   Style="{StaticResource 18DarkGray}"/>
+
+                                            <TextBlock x:ConnectionId='75' x:Name="TxtListName"                      
+                                                       Margin="0,0,5,0" 
+                                                   RelativePanel.RightOf="LblListName"
+                                                   Style="{StaticResource 18Blue}"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"/>
+
+                                            <TextBlock x:Name="LblListPrice" Text="Price: " 
+                                                       Margin="0,0,0,0"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                       RelativePanel.LeftOf="LblCurrency"
+                                                   Style="{StaticResource 18DarkGray}"/>
+
+                                            <TextBlock x:Name="LblCurrency" Text="Rs" 
+                                                       Margin="10,0,1,0" 
+                                                       RelativePanel.LeftOf="TxtListPrice"
+                                                   Style="{StaticResource 18Blue}"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"/>
+
+                                            <TextBlock x:ConnectionId='76' x:Name="TxtListPrice"                       
+                                                       Margin="0,0,20,0" 
+                                                       RelativePanel.AlignRightWithPanel="True"
+                                                   Style="{StaticResource 18Blue}"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"/>
+
+                                        </RelativePanel>
+
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
+
+                            <!-- No results panel -->
+                            <RelativePanel x:ConnectionId='69' x:Name="PanelNoResult" Background="White"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       RelativePanel.AlignBottomWithPanel="True"
+                                       RelativePanel.Below="PanelSearch"
+                                       Visibility="Collapsed">
+
+                                <TextBlock Text="Your search returned no results."
+                                       RelativePanel.AlignTopWithPanel="True"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       TextAlignment="Center" Style="{StaticResource 22LightGray}"
+                                       Margin="40"/>
+
+                            </RelativePanel>
+
+
+                            <StackPanel x:ConnectionId='70' x:Name="PanelButtonsBuying" Orientation="Horizontal" 
+                                        RelativePanel.AlignBottomWithPanel="True"
+                                        Margin="0,0,0,10"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True">
+
+                                <Button x:ConnectionId='71' x:Name="BtnModifyBuying" Margin="1"
+                                    RelativePanel.AlignLeftWithPanel="True"
+                                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                                             
+                                    Template="{StaticResource BlueButtonTemplate}">
+
+                                    <StackPanel Orientation="Horizontal" Padding="10,5,10,5">
+                                        <SymbolIcon Symbol="Edit" Margin="0,0,10,0"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource 16White}">
+                                    Modify Medicine</TextBlock>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:ConnectionId='72' x:Name="BtnRemoveBuying" Margin="1"
+                                    RelativePanel.AlignLeftWithPanel="True"
+                                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                                             
+                                    Template="{StaticResource GrayButtonTemplate}">
+
+                                    <StackPanel Orientation="Horizontal" Padding="10,5,10,5">
+                                        <SymbolIcon Symbol="Delete" Margin="0,0,10,0"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource 16White}">
+                                    Remove Medicine</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+
+                        </RelativePanel>
+
+                        <!-- BUYING OVERLAY -->
+                        <RelativePanel x:ConnectionId='48' x:Name="Overlay1" Background="White" Margin="0,0,5,0"
+                                       Opacity="0.8"
+                                       Grid.Column="0" Visibility="Collapsed">
+                        </RelativePanel>
+
+                        <!-- SELLING PANEL -->
+                        <RelativePanel x:ConnectionId='49' x:Name="PanelSellingList" Background="White" Margin="5,0,0,0"
+                                       Grid.Column="1">
+
+                            <TextBlock x:ConnectionId='51' x:Name="TitleSellingList" Text="Selling Price List" 
+                                       RelativePanel.AlignTopWithPanel="True"
+                                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                       Style="{StaticResource 24DarkGray}"
+                                       Margin="0,15,0,10"/>
+
+                            <Rectangle x:ConnectionId='52' x:Name="Div2" RelativePanel.Below="TitleSellingList"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                       Height="1" Fill="{StaticResource AppBlueDarker}"
+                                       Margin="40,0,40,10"/>
+
+                            <!-- Search Panel -->
+                            <RelativePanel x:ConnectionId='53' x:Name="PanelSearchSelling" 
+                                           RelativePanel.AlignRightWithPanel="True"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                           RelativePanel.Below="Div2" Padding="10">
+
+                                <!--Button - Add Medication-->
+                                <Button x:ConnectionId='63' x:Name="BtnAddSellingMedicine" Margin="1"
+                                    RelativePanel.AlignLeftWithPanel="True"
+                                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                                           
+                                    Template="{StaticResource BlueButtonTemplate}">
+
+                                    <StackPanel Orientation="Horizontal" Padding="10,5,10,5">
+                                        <SymbolIcon Symbol="Add" Margin="0,0,10,0"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource 16White}">
+                                    Add Medicine</TextBlock>
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- Search box -->
+                                <TextBox x:ConnectionId='64' x:Name="TxtSearchSelling" PlaceholderText="Search"
+                                     Style="{StaticResource TextBoxTemplate}"
+                                     RelativePanel.AlignRightWithPanel="True" Width="200"
+                                     RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                                                   />
+
+
+                            </RelativePanel>
+
+                            <!-- List -->
+                            <ListView x:ConnectionId='54' x:Name="SellingListView"
+                                                                           
+                                      Grid.Column="0"
+                                  IsItemClickEnabled="True" Margin="0,0,0,0"
+                                                                         
+                                  RelativePanel.AlignRightWithPanel="True"
+                                  RelativePanel.AlignLeftWithPanel="True"
+                                  RelativePanel.Below="PanelSearchSelling"
+                                  RelativePanel.AlignBottomWithPanel="True">
+
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="Margin" Value="2"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListViewItem">
+                                                    <ListViewItemPresenter
+                                                    SelectedPointerOverBackground="LightBlue"
+                                                    PointerOverBackground="LightBlue"
+                                                    PressedBackground="LightBlue"
+                                                    SelectedBackground="LightBlue" />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate                           >
+                                        <RelativePanel x:ConnectionId='59'>
+
+                                            <TextBlock x:Name="LblListID" Text="ID: " Margin="20,0,0,0"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   Style="{StaticResource 18DarkGray}"/>
+
+                                            <TextBlock x:ConnectionId='60' x:Name="TxtListID"                   
+                                                   RelativePanel.RightOf="LblListID"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   Margin="5,0,30,0"
+                                                   Style="{StaticResource 18Blue}"/>
+
+                                            <TextBlock x:Name="LblListName" Text="Name: " Margin="20,0,5,0"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                   RelativePanel.RightOf="TxtListID"
+                                                   Style="{StaticResource 18DarkGray}"/>
+
+                                            <TextBlock x:ConnectionId='61' x:Name="TxtListName"                      
+                                                       Margin="0,0,5,0" 
+                                                   RelativePanel.RightOf="LblListName"
+                                                   Style="{StaticResource 18Blue}"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"/>
+
+                                            <TextBlock x:Name="LblListPrice" Text="Price: " 
+                                                       Margin="0,0,0,0"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                       RelativePanel.LeftOf="LblCurrency"
+                                                   Style="{StaticResource 18DarkGray}"/>
+
+                                            <TextBlock x:Name="LblCurrency" Text="Rs" 
+                                                       Margin="10,0,5,0" 
+                                                       RelativePanel.LeftOf="TxtListPrice"
+                                                   Style="{StaticResource 18Blue}"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"/>
+
+                                            <TextBlock x:ConnectionId='62' x:Name="TxtListPrice"                       
+                                                       Margin="0,0,20,0" 
+                                                       RelativePanel.AlignRightWithPanel="True"
+                                                   Style="{StaticResource 18Blue}"
+                                                   RelativePanel.AlignVerticalCenterWithPanel="True"/>
+
+                                        </RelativePanel>
+
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
+
+                            <!-- No results panel -->
+                            <RelativePanel x:ConnectionId='55' x:Name="PanelNoResult2" Background="White"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       RelativePanel.AlignBottomWithPanel="True"
+                                       RelativePanel.Below="PanelSearchSelling"
+                                       Visibility="Collapsed">
+
+                                <TextBlock Text="Your search returned no results."
+                                       RelativePanel.AlignTopWithPanel="True"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                       RelativePanel.AlignRightWithPanel="True"
+                                       TextAlignment="Center" Style="{StaticResource 22LightGray}"
+                                       Margin="40"/>
+
+                            </RelativePanel>
+
+                            <!-- Buttons -->
+                            <StackPanel x:ConnectionId='56' x:Name="PanelButtonsSelling" Orientation="Horizontal" 
+                                        RelativePanel.AlignBottomWithPanel="True"
+                                        Margin="0,0,0,10"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True">
+
+                                <Button x:ConnectionId='57' x:Name="BtnModifySelling" Margin="1"
+                                    RelativePanel.AlignLeftWithPanel="True"
+                                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                                      
+                                    Template="{StaticResource BlueButtonTemplate}">
+
+                                    <StackPanel Orientation="Horizontal" Padding="10,5,10,5">
+                                        <SymbolIcon Symbol="Edit" Margin="0,0,10,0"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource 16White}">
+                                    Modify Medicine</TextBlock>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button x:ConnectionId='58' x:Name="BtnRemoveSelling" Margin="1"
+                                    RelativePanel.AlignLeftWithPanel="True"
+                                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                                                                      
+                                    Template="{StaticResource GrayButtonTemplate}">
+
+                                    <StackPanel Orientation="Horizontal" Padding="10,5,10,5">
+                                        <SymbolIcon Symbol="Delete" Margin="0,0,10,0"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource 16White}">
+                                    Remove Medicine</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+
+                        </RelativePanel>
+
+                        <!-- SELLING OVERLAY -->
+                        <RelativePanel x:ConnectionId='50' x:Name="Overlay2" Background="White" Margin="0,0,5,0"
+                                       Opacity="0.8"
+                                       Grid.Column="1" Visibility="Collapsed">
+                        </RelativePanel>
+
+                    </Grid>
+
+
+                    <!-- OVERLAY -->
+                    <RelativePanel x:ConnectionId='39' x:Name="Overlay" Background="#AAFFFFFF"
+                                   Visibility="Collapsed" RelativePanel.AlignTopWithPanel="True"
+                                   RelativePanel.AlignBottomWithPanel="True"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignRightWithPanel="True"/>
+
+                    <!-- DIALOG -->
+                    <RelativePanel x:ConnectionId='40' x:Name="PanelDialog" Background="LightGray" Grid.Column="1"
+                                           BorderBrush="{StaticResource AppBlueDarker}"
+                                           BorderThickness="1"
+                               Visibility="Collapsed" Margin="10"
+                               RelativePanel.AlignTopWithPanel="True"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                           Width="400" MaxWidth="500"
+                                   Height="150" MaxHeight="200">
+
+                        <TextBlock x:ConnectionId='45' x:Name="TxtDialogMessage" Margin="20,15,20,15"
+                                   RelativePanel.AlignTopWithPanel="True"
+                                           Style="{StaticResource 16DarkGray}"
+                               TextWrapping="WrapWholeWords">Message</TextBlock>
+
+                        <Button x:ConnectionId='46' x:Name="BtnDialogOK" Margin="15"
+                                        RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                        RelativePanel.AlignBottomWithPanel="True" Padding="30,10" 
+                                Template="{StaticResource BlueButtonTemplate}"
+                                                                 >
+                            OK</Button>
+
+                    </RelativePanel>
+
+                    <!-- DIALOG 2 -->
+                    <RelativePanel x:ConnectionId='41' x:Name="PanelDialog2" Background="LightGray" Grid.Column="1"
+                                           BorderBrush="{StaticResource AppBlueDarker}"
+                                           BorderThickness="1"
+                               Visibility="Collapsed" Margin="10"
+                               RelativePanel.AlignTopWithPanel="True"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                           Width="400" MaxWidth="500"
+                                   Height="150" MaxHeight="200">
+
+                        <TextBlock x:ConnectionId='42' x:Name="TxtDialogMessage2" Margin="20,15,20,15"
+                                   RelativePanel.AlignTopWithPanel="True"
+                                           Style="{StaticResource 16DarkGray}"
+                               TextWrapping="WrapWholeWords">Message</TextBlock>
+
+                        <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                        RelativePanel.AlignBottomWithPanel="True" 
+                                    Orientation="Horizontal">
+
+                            <Button x:ConnectionId='43' x:Name="BtnDialogOK2" Margin="15"
+                                        Padding="30,10" 
+                                Template="{StaticResource BlueButtonTemplate}"
+                                                                  >
+                                Yes
+                            </Button>
+
+                            <Button x:ConnectionId='44' x:Name="BtnDialogCancel2" Margin="15"
+                                        Padding="30,10" 
+                                Template="{StaticResource GrayButtonTemplate}"
+                                                                      >
+                                No
+                            </Button>
+
+                        </StackPanel>
+
+
+
+                    </RelativePanel>
+
+                </RelativePanel>
+
+                <!-- ERROR PANEL -->
+                <RelativePanel x:ConnectionId='27' x:Name="PanelError" Background="Gray"
+                               Visibility="Collapsed"
+                               RelativePanel.Above="PanelAddModify"
+                               Margin="20"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True">
+
+                    <TextBlock x:ConnectionId='37' x:Name="TxtErrorMessage" Margin="20,15,20,15" Style="{StaticResource 16White}"
+                               TextWrapping="WrapWholeWords">Error</TextBlock>
+
+                    <Button x:ConnectionId='38' x:Name="BtnErrorClose" Template="{StaticResource WhiteTextBtn}"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"
+                            Padding="5"                            >
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE711;" FontSize="15"
+                                   FontWeight="Bold"/>
+                    </Button>
+
+                </RelativePanel>
+
+                <!-- Add/Modify Panel -->
+
+                <RelativePanel x:ConnectionId='28' x:Name="PanelAddModify" Background="White" Visibility="Collapsed"
+                               BorderBrush="#666666" BorderThickness="0,1,0,0"
+                               RelativePanel.AlignBottomWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True"
+                               RelativePanel.AlignLeftWithPanel="True">
+
+                    <StackPanel Orientation="Horizontal" Padding="20"
+                                RelativePanel.AlignHorizontalCenterWithPanel="True">
+
+                        <TextBlock Text="*Medication Name: " Style="{StaticResource 18Blue}"
+                                   Margin="0,0,10,0"/>
+
+                        <TextBox x:ConnectionId='35' x:Name="TxtName" Style="{StaticResource TextBoxTemplate}"
+                                 Margin="0,0,30,0" Width="300"/>
+
+                        <TextBlock Text="*Price: " Style="{StaticResource 18Blue}"
+                                   Margin="0,0,15,0"/>
+
+                        <TextBlock Text="Rs" Style="{StaticResource 18DarkGray}"
+                                   Margin="0,0,5,6" VerticalAlignment="Bottom" />
+
+                        <TextBox x:ConnectionId='36' x:Name="TxtPrice" Style="{StaticResource TextBoxTemplate}"
+                                 Margin="0,0,0,0" Width="100"/>
+
+                    </StackPanel>
+
+                    <!-- BUYING BUTTONS -->
+
+                    <Button x:ConnectionId='29' Name="BtnAddThisBuying" RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"                               
+                                    Padding="20,10" FontSize="16"
+                            RelativePanel.Above="BtnAddBuyingCancel"
+                                    Template="{StaticResource BlueButtonTemplate}">
+                        <SymbolIcon Symbol="Accept"/>
+                    </Button>
+
+                    <Button x:ConnectionId='30' Name="BtnModifyThisBuying" RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"                                  
+                                    Padding="20,10" FontSize="16"
+                            RelativePanel.Above="BtnAddBuyingCancel"
+                                    Template="{StaticResource BlueButtonTemplate}">
+                        <SymbolIcon Symbol="Accept"/>
+                    </Button>
+
+                    <Button x:ConnectionId='31' Name="BtnAddBuyingCancel" RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignBottomWithPanel="True"                                 
+                                    Padding="20,10" FontSize="16"
+                                    Template="{StaticResource GrayButtonTemplate}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
+
+                    <!-- SELLING BUTTONS -->
+
+                    <Button x:ConnectionId='32' Name="BtnAddThisSelling" RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"                                
+                                    Padding="20,10" FontSize="16"
+                            RelativePanel.Above="BtnAddSellingCancel"
+                                    Template="{StaticResource BlueButtonTemplate}">
+                        <SymbolIcon Symbol="Accept"/>
+                    </Button>
+
+                    <Button x:ConnectionId='33' Name="BtnModifyThisSelling" RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignTopWithPanel="True"                                   
+                                    Padding="20,10" FontSize="16"
+                            RelativePanel.Above="BtnAddSellingCancel"
+                                    Template="{StaticResource BlueButtonTemplate}">
+                        <SymbolIcon Symbol="Accept"/>
+                    </Button>
+
+                    <Button x:ConnectionId='34' Name="BtnAddSellingCancel" RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.AlignBottomWithPanel="True"                                  
+                                    Padding="20,10" FontSize="16"
+                                    Template="{StaticResource GrayButtonTemplate}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
+
+                </RelativePanel>
+
+            </RelativePanel>
+        </SplitView.Content>
+
+    </SplitView>
+</Page>
+
